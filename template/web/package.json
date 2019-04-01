@@ -1,0 +1,38 @@
+{
+  "name": "<#< repository.name >#>-studio",
+  "version": "1.0.0",
+  "description": "An event website powered by Nuxt and Sanity.io",
+  "author": "Sanity.io",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.5.1",
+    "@nuxtjs/pwa": "^2.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.100",
+    "@nuxtjs/eslint-config": "^0.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": ">=12.0.0",
+    "eslint-plugin-import": ">=2.16.0",
+    "eslint-plugin-jest": ">=22.4.1",
+    "eslint-plugin-node": ">=8.0.1",
+    "eslint-plugin-nuxt": ">=0.4.3",
+    "eslint-plugin-promise": ">=4.1.1",
+    "eslint-plugin-standard": ">=4.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-vue": "^5.2.2",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  }
+}

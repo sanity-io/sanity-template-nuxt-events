@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "title": "Blog with Gatsby",
+  "description": "The de facto blog template for Sanity with Gatsby.",
+  "deployments": [
+    {
+      "id": "studio",
+      "type": "studio",
+      "title": "Content Studio",
+      "dir": "./studio",
+      "provider": {
+        "name": "netlify",
+        "config": {
+          "base": "studio",
+          "cmd": "npm run build && cp ./netlify.toml dist",
+          "dir": "studio/dist"
+        }
+      }
+    },
+    {
+      "id": "web",
+      "type": "web",
+      "title": "Frontend",
+      "dir": "./web",
+      "requiredTokens": [
+        {
+          "role": "deploy-studio",
+          "label": "GraphQL API Deployer"
+        }
+      ],
+      "provider": {
+        "name": "netlify",
+        "requirements": ["build-hook"],
+        "config": {
+          "cmd": "npm run build-web",
+          "dir": "web/public"
+        }
+      },
+      "preview": {
+        "images": [
+          { "src": "assets/preview-00.jpg", "alt": "A mock preview image" }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "technologies": [
+      {
+        "id": "gatsby",
+        "name": "Gatsby",
+        "url": "https://www.gatsbyjs.org/"
+      },
+      {
+        "id": "netlify",
+        "name": "Netlify",
+        "url": "https://www.netlify.com/"
+      }
+    ]
+  }
+}

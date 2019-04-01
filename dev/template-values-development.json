@@ -1,0 +1,37 @@
+{
+  "repository": {
+    "name": "dev-sanity-gatsby-blog",
+    "owner": "mariuslundgard",
+    "private": false
+  },
+  "sanity": {
+    "dataset": "events",
+    "projectId": "jmhf2rn8",
+    "projectTitle": "Events"
+  },
+  "user": {
+    "profileImage": "https://lh3.googleusercontent.com/-a67P3TV8b5g/AAAAAAAAAAI/AAAAAAAAADI/LGBX1ZAjh88/photo.jpg",
+    "displayName": "Marius Lundgård",
+    "email": "marius@sanity.io"
+  },
+  "userInput": {},
+  "deployments": {
+    "studio": {
+      "title": "Content Studio",
+      "url": "https://sanity-gatsby-blog2-studio-2wk163sh.netlify.com",
+      "provider": {
+        "name": "netlify",
+        "siteId": "xxxx-xxxxx-xxxxx-xxxx-xxxxx"
+      }
+    },
+    "web": {
+      "title": "Frontend",
+      "url": "https://sanity-gatsby-blog2-web.netlify.com",
+      "provider": {
+        "name": "netlify",
+        "buildHookId": "5c9cabc0a3ae52327ac0fe10",
+        "siteId": "xxxx-xxxxx-xxxxx-xxxx-xxxxx"
+      }
+    }
+  }
+}
