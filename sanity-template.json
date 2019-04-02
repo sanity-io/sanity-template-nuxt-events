@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Blog with Gatsby",
-  "description": "The de facto blog template for Sanity with Gatsby.",
+  "title": "Events with Nuxt.js",
+  "description": "A website for listing events and happenings.",
   "deployments": [
     {
       "id": "studio",
@@ -46,9 +46,9 @@
   "metadata": {
     "technologies": [
       {
-        "id": "gatsby",
-        "name": "Gatsby",
-        "url": "https://www.gatsbyjs.org/"
+        "id": "nuxt",
+        "name": "Nuxt.js",
+        "url": "https://nuxtjs.org/"
       },
       {
         "id": "netlify",
