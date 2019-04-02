@@ -33,6 +33,11 @@ export default {
       description: 'Where will the event take place?'
     },
     {
+      name: 'ticket',
+      type: 'url',
+      title: 'Ticket link'
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',
