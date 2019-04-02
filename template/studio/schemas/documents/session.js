@@ -9,11 +9,17 @@ export default {
       title: 'Title'
     },
     {
-      name: 'person',
-      type: 'reference',
-      title: 'Person',
+      name: 'persons',
+      type: 'array',
+      title: 'Persons',
       description: 'Who is responsible for this session?',
-      to: [{ type: 'person'}]
+      of: [
+        {
+          name: 'person',
+          type: 'personReference',
+          title: 'Person'
+        },
+      ]
     },
     {
       name: 'sessionType',
