@@ -1,10 +1,10 @@
-# sanity-template-gatsby-blog
+# sanity-template-nuxt-events
 
 ## _WORK IN PROGRESS_
 
-This template repo is used by Sanity.io to easily create deployed and configured projects through a web interface. You can test it by [creating this project](https://create.sanity.io/?template=sanity-io/sanity-template-gatsby-blog).
+This template repo is used by Sanity.io to easily create deployed and configured projects through a web interface. You can test it by [creating this project](https://create.sanity.io/?template=sanity-io/sanity-template-nuxt-events).
 
-The template contains both a Sanity.io Content Studio and a front-end in Gatsby. Both are deployed on Netlify.
+The template contains both a Sanity.io Content Studio and a front-end in Nuxt. Both are deployed on Netlify.
 
 Feel free to clone this template to create your own automagic project creation experiences.
 
