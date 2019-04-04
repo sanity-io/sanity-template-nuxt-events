@@ -1,12 +1,11 @@
 <template>
   <section class="container">
     <div>
-      <logo />
       <h1 class="title">
-        web
+        {{ info.name }}
       </h1>
       <h2 class="subtitle">
-        An event website powered by Nuxt and Sanity.io
+        {{ info.description }}
       </h2>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green"
@@ -19,16 +18,36 @@
           >GitHub</a
         >
       </div>
+      <ul>
+        <li v-for="session in sessions" :key="session._id">
+          <h2>{{ session.title || 'Undefined title' }}</h2>
+          <p>{{ session.sessionType }}</p>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import sanityClient from '../sanityClient'
+
+const query = `
+  {
+    "info": *[_id == "eventInformation"] {
+      ..., logo { ..., asset->}
+    }[0],
+    "program": *[_id == "program"][0],
+    "sessions": *[_type == "session"] {
+      ..., speaker->
+    },
+    "speakers": *[_type == "person"]
+  }
+`
 
 export default {
-  components: {
-    Logo
+  components: {},
+  async asyncData() {
+    return await sanityClient.fetch(query)
   }
 }
 </script>

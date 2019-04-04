@@ -1,6 +1,4 @@
 {
-  "semi": false,
-  "singleQuote": true,
   "eslint.validate": [
     {
       "language": "vue",

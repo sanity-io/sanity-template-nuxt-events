@@ -1,7 +1,15 @@
 import pkg from './package'
+import sanityClient from './sanityClient'
+
+const routesQuery = `
+  {
+    "sessions": *[_type == "session"],
+    "speakers": *[_type == "person" && defined(slug.current)]
+  }
+`
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
    ** Headers of the page
@@ -29,12 +37,34 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/eventInformation'],
 
   /*
    ** Nuxt.js modules
    */
   modules: ['@nuxtjs/pwa'],
+
+  /*
+   ** Set global info from sanity document
+   */
+  eventInformation: () => {
+    return sanityClient.fetch('*[_id == "eventInformation"]').then(res => res)
+  },
+
+  /*
+   ** Generate dynamic routes from data from sanity.
+   ** Used only for generating static served HTML files
+   */
+  generate: {
+    routes: () => {
+      return sanityClient.fetch(routesQuery).then(res => {
+        return [
+          ...res.sessions.map(item => `/sessions/${item._id}`),
+          ...res.speakers.map(item => `/speakers/${item.slug.current}`)
+        ]
+      })
+    }
+  },
 
   /*
    ** Build configuration

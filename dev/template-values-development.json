@@ -1,13 +1,13 @@
 {
   "repository": {
-    "name": "dev-sanity-gatsby-blog",
+    "name": "dev-sanity-nuxt-events",
     "owner": "mariuslundgard",
     "private": false
   },
   "sanity": {
     "dataset": "events",
     "projectId": "jmhf2rn8",
-    "projectTitle": "Events"
+    "projectTitle": "Nuxt.js Events"
   },
   "user": {
     "profileImage": "https://lh3.googleusercontent.com/-a67P3TV8b5g/AAAAAAAAAAI/AAAAAAAAADI/LGBX1ZAjh88/photo.jpg",
@@ -18,7 +18,7 @@
   "deployments": {
     "studio": {
       "title": "Content Studio",
-      "url": "https://sanity-gatsby-blog2-studio-2wk163sh.netlify.com",
+      "url": "https://path-to-studio",
       "provider": {
         "name": "netlify",
         "siteId": "xxxx-xxxxx-xxxxx-xxxx-xxxxx"
@@ -26,7 +26,7 @@
     },
     "web": {
       "title": "Frontend",
-      "url": "https://sanity-gatsby-blog2-web.netlify.com",
+      "url": "https://path-to-frontend",
       "provider": {
         "name": "netlify",
         "buildHookId": "5c9cabc0a3ae52327ac0fe10",

@@ -3,20 +3,22 @@
 .root {
   display: grid;
   grid-gap: var(--medium-padding);
-  grid-template-columns: repeat(4, minmax(120px, 25%));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   overflow-x: auto;
 }
 
 .link {
   outline: none;
   background: #fff;
-  display: block;
+  display: flex;
+  flex-direction: column;
   border-radius: 4px;
   padding: var(--medium-padding);
   text-decoration: none;
   text-align: center;
   color: inherit;
   box-sizing: border-box;
+  height: 100%;
 
   @media (hover: hover) {
     @nest &:hover {
