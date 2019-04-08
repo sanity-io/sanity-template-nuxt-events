@@ -32,7 +32,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [{ src: 'normalize.css' }],
 
   /*
    ** Plugins to load before mounting the App
