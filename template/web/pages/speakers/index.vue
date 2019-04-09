@@ -3,9 +3,8 @@
     <h1>Speakers</h1>
     <ul>
       <li v-for="speaker in speakers" :key="speaker._id">
-        <h2>{{ speaker.name || 'Secret speaker' }}</h2>
         <nuxt-link :to="{ path: `/speakers/${speaker.slug.current}` }">
-          View
+          <h2>{{ speaker.name || 'Secret speaker' }}</h2>
         </nuxt-link>
       </li>
     </ul>

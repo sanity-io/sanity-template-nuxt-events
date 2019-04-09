@@ -18,7 +18,8 @@
     "@sanity/image-url": "^0.140.12",
     "cross-env": "^5.2.0",
     "normalize.css": "^8.0.1",
-    "nuxt": "^2.5.1"
+    "nuxt": "^2.5.1",
+    "sanity-blocks-vue-component": "^0.1.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

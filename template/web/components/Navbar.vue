@@ -1,9 +1,9 @@
 <template>
   <div class="header">
-    <nuxt-link to="/">{{ title }}</nuxt-link>
+    <nuxt-link to="/" class="home">{{ title }}</nuxt-link>
     <nav>
       <nuxt-link to="/sessions">Sessions</nuxt-link>
-      <nuxt-link to="/speakers">Speakers</nuxt-link>
+      <nuxt-link to="/code-of-conduct">Code of conduct</nuxt-link>
     </nav>
   </div>
 </template>
@@ -22,9 +22,27 @@ export default {
 <style scoped>
 .header {
   display: flex;
-  background-color: #000;
-  color: #fff;
   padding: 1rem;
   justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav a {
+  margin-left: 2rem;
+}
+
+.header a {
+  display: block;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.home {
+  font-weight: 800;
+  text-transform: uppercase;
 }
 </style>

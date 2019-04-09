@@ -29,10 +29,9 @@ html {
 }
 
 section {
-  margin: 1rem;
+  padding: 1rem;
 }
 
 .container {
-  padding: 0 1rem;
 }
 </style>
