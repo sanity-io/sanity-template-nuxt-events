@@ -26,8 +26,8 @@
           </p>
           <ul v-if="scheduleItem.session.persons" class="persons">
             <li
-              v-for="(personRef, index) in scheduleItem.session.persons"
-              :key="index"
+              v-for="personRef in scheduleItem.session.persons"
+              :key="personRef.person._id"
               class="person"
             >
               <nuxt-link
@@ -169,8 +169,8 @@ li.session h3 + p {
   display: flex;
   margin: 0;
   padding: 0;
-  margin-right: 1em;
-  margin-top: 1em;
+  margin-right: 2em;
+  margin-top: 2em;
   align-items: center;
 }
 
