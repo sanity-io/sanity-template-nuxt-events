@@ -1,12 +1,6 @@
 <template>
   <section class="container">
     <h1>{{ title }}</h1>
-    <h2>
-      By
-      <nuxt-link :to="`/speakers/${person.slug.current}`">
-        {{ person.name }}
-      </nuxt-link>
-    </h2>
   </section>
 </template>
 
@@ -26,9 +20,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container {
-  border: 1px solid red;
-}
-</style>

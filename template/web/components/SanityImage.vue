@@ -18,13 +18,27 @@ export default {
       default: 'Missing alternative text'
     },
     width: {
-      default: 200,
       type: Number
+    },
+    height: {
+      type: Number
+    },
+    auto: {
+      default: 'format',
+      type: String
+    },
+    fit: {
+      default: 'max',
+      type: String
     }
   },
   computed: {
     imageUrl: function() {
-      return builder.image(this.image).width(this.width)
+      return builder
+        .image(this.image)
+        .size(this.width, this.height)
+        .auto(this.auto)
+        .fit(this.fit)
     }
   }
 }

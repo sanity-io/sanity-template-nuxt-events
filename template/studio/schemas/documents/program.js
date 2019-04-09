@@ -6,7 +6,7 @@ export default {
     {
       name: 'schedule',
       type: 'array',
-      title: 'Scedule',
+      title: 'Schedule',
       of: [{ type: 'scheduleItem' }]
     }
   ],

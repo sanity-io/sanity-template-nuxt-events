@@ -31,4 +31,8 @@ html {
 section {
   margin: 1rem;
 }
+
+.container {
+  padding: 0 1rem;
+}
 </style>
