@@ -1,11 +1,11 @@
 <template>
-  <div class="header">
+  <header class="header">
     <nuxt-link to="/" class="home">{{ title }}</nuxt-link>
     <nav>
       <nuxt-link to="/sessions">Sessions</nuxt-link>
-      <nuxt-link to="/code-of-conduct">Code of conduct</nuxt-link>
+      <a v-if="ticketLink" :href="ticketLink">Tickets</a>
     </nav>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -14,6 +14,10 @@ export default {
     title: {
       type: String,
       default: 'No title set'
+    },
+    ticketLink: {
+      type: String,
+      default: undefined
     }
   }
 }

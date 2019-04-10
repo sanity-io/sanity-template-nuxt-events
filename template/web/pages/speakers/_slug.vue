@@ -1,31 +1,27 @@
 <template>
   <section class="container">
     <SanityImage
-      :image="image"
       :v-if="image.asset"
+      :image="image"
       class="image"
-      height="1200"
-      width="1200"
+      :height="1200"
+      :width="1200"
     />
     <h1>{{ name }}</h1>
-    <BlockContent :blocks="bio" />
-    <h2 v-if="sessions">Sessions</h2>
-    <ul v-if="sessions" class="sessions">
-      <li
-        v-for="session in sessions"
-        :key="session._id"
-        class="session"
-        :v-if="session"
-      >
-        {{ session.title }}
-      </li>
-    </ul>
+    <div :v-if="bio">
+      <BlockContent :v-if="bio" :blocks="bio" />
+    </div>
+    <div v-if="sessions" class="sessions">
+      <h2>Sessions</h2>
+      <SessionList :sessions="sessions" />
+    </div>
   </section>
 </template>
 
 <script>
 import sanityClient from '~/sanityClient'
 import SanityImage from '~/components/SanityImage'
+import SessionList from '~/components/SessionList'
 import BlockContent from 'sanity-blocks-vue-component'
 
 const query = `
@@ -38,7 +34,8 @@ const query = `
 export default {
   components: {
     SanityImage,
-    BlockContent
+    BlockContent,
+    SessionList
   },
   async asyncData({ params }) {
     return await sanityClient.fetch(query, params)
@@ -50,6 +47,17 @@ export default {
 .container {
   text-align: center;
 }
+
+.sessions {
+  text-align: left;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.sessions h2 {
+  text-align: center;
+}
+
 .image {
   border-radius: 50%;
   margin: 2rem;
@@ -57,16 +65,7 @@ export default {
   width: 50vw;
 }
 
-.sessions {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.session {
-  display: flex;
-  justify-content: center;
-  margin: 1rem;
+h2 {
+  margin-top: 2em;
 }
 </style>

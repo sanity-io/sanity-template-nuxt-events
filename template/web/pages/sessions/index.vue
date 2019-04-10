@@ -1,20 +1,15 @@
 <template>
   <section class="container">
-    <h1>Sessions</h1>
-    <ul>
-      <li v-for="session in sessions" :key="session._id">
-        <h2>{{ session.title || 'Undefined title' }}</h2>
-        <p>{{ session.sessionType }}</p>
-        <nuxt-link :to="{ path: `/sessions/${session._id}` }">
-          View
-        </nuxt-link>
-      </li>
-    </ul>
+    <h1 class="title">Sessions</h1>
+    <div class="sessions">
+      <SessionList v-if="sessions" :sessions="sessions" />
+    </div>
   </section>
 </template>
 
 <script>
 import sanityClient from '~/sanityClient'
+import SessionList from '~/components/SessionList'
 
 const query = `
   {
@@ -25,7 +20,7 @@ const query = `
 `
 
 export default {
-  components: {},
+  components: { SessionList },
   async asyncData() {
     return await sanityClient.fetch(query)
   }
@@ -33,7 +28,15 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  border: 1px solid red;
+.title {
+  text-align: center;
+  font-size: 5rem;
+  margin-bottom: 4rem;
+  padding-bottom: 0;
+}
+
+.sessions {
+  margin: 0 auto;
+  max-width: 30rem;
 }
 </style>

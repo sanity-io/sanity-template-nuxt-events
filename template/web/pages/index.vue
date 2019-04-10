@@ -1,9 +1,15 @@
 <template>
   <section class="container">
-    <h1 class="title">{{ info.name }}</h1>
-    <p class="subtitle">{{ info.description }}</p>
+    <div class="top">
+      <h1 class="title">{{ info.name }}</h1>
+      <p class="subtitle">{{ info.description }}</p>
+      <div class="dates">
+        {{ new Date(info.schedule.from) | dateFilter('DD MMMM') }}
+        -
+        {{ new Date(info.schedule.to) | dateFilter('DD MMMM YYYY') }}
+      </div>
+    </div>
 
-    <h2>Program</h2>
     <ul class="sessions">
       <li
         v-for="scheduleItem in program.schedule"
@@ -52,6 +58,8 @@
 </template>
 
 <script>
+import { dateFilter } from 'vue-date-fns'
+
 import sanityClient from '../sanityClient'
 import SanityImage from '~/components/SanityImage'
 
@@ -85,6 +93,9 @@ export default {
   components: {
     SanityImage
   },
+  filters: {
+    dateFilter
+  },
   async asyncData() {
     return await sanityClient.fetch(query)
   }
@@ -97,6 +108,10 @@ export default {
   margin: 0 auto;
 }
 
+.top {
+  text-align: center;
+}
+
 .title {
   font-size: 5rem;
   margin-bottom: 0;
@@ -106,8 +121,12 @@ export default {
 .title + p {
   margin-top: 0;
   font-size: 1.5rem;
-  margin-bottom: 5rem;
   font-weight: 300;
+  margin-bottom: 3rem;
+}
+
+.title + p + .dates {
+  margin-bottom: 5rem;
 }
 
 ul.sessions {
@@ -116,32 +135,48 @@ ul.sessions {
 }
 
 li.session {
-  display: flex;
-  align-items: baseline;
+  display: block;
   margin-bottom: 5rem;
+}
+
+@media screen and (min-width: 768px) {
+  li.session {
+    display: flex;
+    align-items: baseline;
+  }
 }
 
 li.session .meta {
   display: flex;
-  flex-direction: column;
-  justify-content: baseline;
-  flex-basis: 10rem;
-  min-width: 7rem;
-  overflow: hidden;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  margin-right: 1rem;
-  padding-right: 1rem;
+  justify-content: space-between;
   text-transform: capitalize;
-  text-align: right;
-  font-size: 1.2em;
-  opacity: 0.5;
+  font-size: 0.8em;
 }
 
-li.session .meta .time {
-  font-size: 0.7em;
-  margin-top: 1.27rem;
+@media screen and (min-width: 768px) {
+  li.session .meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    flex-basis: 10rem;
+    min-width: 7rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    margin-right: 1rem;
+    padding-right: 1rem;
+    text-align: right;
+    font-size: 1.2em;
+    opacity: 0.5;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  li.session .meta .time {
+    font-size: 0.7em;
+    margin-top: 1.27rem;
+  }
 }
 
 li.session h3 {

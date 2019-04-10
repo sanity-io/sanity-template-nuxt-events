@@ -3,6 +3,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/require-default-prop */
 import sanityClient from '~/sanityClient'
 import imageUrlBuilder from '@sanity/image-url'
 const builder = imageUrlBuilder(sanityClient)
@@ -17,12 +18,8 @@ export default {
       type: String,
       default: 'Missing alternative text'
     },
-    width: {
-      type: Number
-    },
-    height: {
-      type: Number
-    },
+    width: Number,
+    height: Number,
     auto: {
       default: 'format',
       type: String

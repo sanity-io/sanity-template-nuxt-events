@@ -13,7 +13,10 @@ const query = `
   *[_id == "codeOfConduct"][0] {
     body[] {
       ...,
-      eventReference->
+      children[] {
+        ...,
+        event->
+      }
     }
   }
 `
@@ -21,7 +24,7 @@ const serializers = {
   types: {
     eventReference: props => {
       console.log('eventReference', props)
-      return '<b>eventReference</b>'
+      return `"${props.node.event.name}"`
     },
     personReference: () => {
       return 'personReference'
