@@ -2,7 +2,10 @@
   <section class="container">
     <h1 class="title">Sessions</h1>
     <div class="sessions">
-      <SessionList v-if="sessions" :sessions="sessions" />
+      <SessionList
+        v-if="sessions"
+        :sessions="sessions.filter(s => s.sessionType !== 'break')"
+      />
     </div>
   </section>
 </template>

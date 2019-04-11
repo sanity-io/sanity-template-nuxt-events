@@ -25,18 +25,24 @@ export default {
 
 <style scoped>
 .header {
-  display: flex;
   padding: 1rem;
-  justify-content: space-between;
 }
 
-nav {
-  display: flex;
-  justify-content: flex-end;
+@media screen and (min-width: 520px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
-nav a {
-  margin-left: 2rem;
+@media screen and (min-width: 520px) {
+  nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+  nav a {
+    margin-left: 2rem;
+  }
 }
 
 .header a {

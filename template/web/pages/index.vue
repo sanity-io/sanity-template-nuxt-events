@@ -144,16 +144,25 @@ export default {
 }
 
 .title {
-  font-size: 5rem;
-  margin-bottom: 0;
+  font-size: 12vw;
+  margin-bottom: 0.1em;
   padding-bottom: 0;
 }
 
 .title + p {
+  font-size: 1.2em;
   margin-top: 0;
-  font-size: 1.5rem;
   font-weight: 300;
   margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 5rem;
+  }
+  .title + p {
+    font-size: 1.5rem;
+  }
 }
 
 .title + p + .dates {

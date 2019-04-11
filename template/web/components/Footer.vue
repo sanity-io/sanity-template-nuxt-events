@@ -15,7 +15,10 @@
       </div>
       <div>{{ eventInformation.venue.country }}</div>
     </address>
-    Powered by Nuxt.js and Sanity.io {{ year }}
+    <div class="power">
+      Powered by <a href="https://nuxtjs.org">Nuxt.js</a> and
+      <a href="https://www.sanity.io">Sanity.io</a> {{ year }}
+    </div>
   </footer>
 </template>
 
@@ -60,5 +63,11 @@ address.venue {
   margin: 1em;
   margin-top: 3em;
   font-style: normal;
+}
+
+.power a {
+  display: inline;
+  padding: 0;
+  text-decoration: underline;
 }
 </style>
