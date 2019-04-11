@@ -15,10 +15,10 @@ export default {
       description: 'Describe your event for search engines and social media.'
     },
     {
-      name: 'logo',
+      name: 'image',
       type: 'mainImage',
-      title: 'Event logo',
-      description: 'The highest resolution and/or vectorized logo'
+      title: 'Event image',
+      description: 'The highest resolution'
     },
     {
       name: 'schedule',

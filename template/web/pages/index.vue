@@ -1,6 +1,6 @@
 <template>
-  <section class="container">
-    <div class="top">
+  <section>
+    <div class="container top">
       <h1 class="title">{{ info.name }}</h1>
       <p class="subtitle">{{ info.description }}</p>
       <div class="dates">
@@ -10,50 +10,61 @@
       </div>
     </div>
 
-    <ul class="sessions">
-      <li
-        v-for="scheduleItem in program.schedule"
-        :key="scheduleItem._key"
-        class="session"
-      >
-        <div class="meta">
-          {{ scheduleItem.session.sessionType }}
-          <div class="time">{{ scheduleItem.duration }}min</div>
-        </div>
-        <div>
-          <h3>
-            <nuxt-link
-              :to="{ path: `/sessions/${scheduleItem.session._id}` }"
-              >{{ scheduleItem.session.title || 'Undefined title' }}</nuxt-link
-            >
-          </h3>
-          <p>
-            {{ scheduleItem.session.summary }}
-          </p>
-          <ul v-if="scheduleItem.session.persons" class="persons">
-            <li
-              v-for="personRef in scheduleItem.session.persons"
-              :key="personRef.person._id"
-              class="person"
-            >
+    <figure :v-if="info.image">
+      <SanityImage :image="info.image" :width="1800" class="mainImage" />
+      <figcaption>{{ info.image.caption }}</figcaption>
+    </figure>
+
+    <div class="container">
+      <h2 class="sessions-title">Schedule</h2>
+      <ul class="sessions">
+        <li
+          v-for="scheduleItem in program.schedule"
+          :key="scheduleItem._key"
+          class="session"
+        >
+          <div class="meta">
+            {{ scheduleItem.session.sessionType }}
+            <div class="time">{{ scheduleItem.duration }}min</div>
+          </div>
+          <div>
+            <h3>
               <nuxt-link
-                :to="{ path: `/speakers/${personRef.person.slug.current}` }"
+                :to="{ path: `/sessions/${scheduleItem.session._id}` }"
+                >{{
+                  scheduleItem.session.title || 'Undefined title'
+                }}</nuxt-link
               >
-                <SanityImage
-                  :image="personRef.person.image"
-                  :alt="personRef.person.image.alt"
-                  :width="128"
-                  :height="128"
-                  fit="crop"
-                  class="personImage"
-                />
-                {{ personRef.person.name }}
-              </nuxt-link>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+            </h3>
+            <p>
+              {{ scheduleItem.session.summary }}
+            </p>
+
+            <ul v-if="scheduleItem.session.persons" class="persons">
+              <li
+                v-for="personRef in scheduleItem.session.persons"
+                :key="personRef.person._id"
+                class="person"
+              >
+                <nuxt-link
+                  :to="{ path: `/speakers/${personRef.person.slug.current}` }"
+                >
+                  <SanityImage
+                    :image="personRef.person.image"
+                    :alt="personRef.person.image.alt"
+                    :width="128"
+                    :height="128"
+                    fit="crop"
+                    class="personImage"
+                  />
+                  {{ personRef.person.name }}
+                </nuxt-link>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
 </template>
 
@@ -66,7 +77,7 @@ import SanityImage from '~/components/SanityImage'
 const query = `
   {
     "info": *[_id == "eventInformation"] {
-      ..., logo { ..., asset->}
+      ..., image { ..., asset->}
     }[0],
     "program": *[_id == "program"][0] {
       ...,
@@ -98,6 +109,26 @@ export default {
   },
   async asyncData() {
     return await sanityClient.fetch(query)
+  },
+  head() {
+    if (!this || !this.info) {
+      return
+    }
+    return {
+      title: this.info.name,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.info.description
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: this.info.keywords.join(',')
+        }
+      ]
+    }
   }
 }
 </script>
@@ -127,6 +158,25 @@ export default {
 
 .title + p + .dates {
   margin-bottom: 5rem;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 3rem;
+}
+
+figcaption {
+  font-size: 0.8em;
+}
+
+.mainImage {
+  width: 100vw;
+  margin-left: -1rem;
+}
+
+.sessions-title {
+  text-align: center;
+  margin-bottom: 3em;
 }
 
 ul.sessions {

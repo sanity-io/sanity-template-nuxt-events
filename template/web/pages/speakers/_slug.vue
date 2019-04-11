@@ -23,6 +23,7 @@ import sanityClient from '~/sanityClient'
 import SanityImage from '~/components/SanityImage'
 import SessionList from '~/components/SessionList'
 import BlockContent from 'sanity-blocks-vue-component'
+import blocksToText from '~/lib/blocksToText'
 
 const query = `
   *[_type == "person" && slug.current == $slug][0] {
@@ -39,6 +40,20 @@ export default {
   },
   async asyncData({ params }) {
     return await sanityClient.fetch(query, params)
+  },
+  head() {
+    const { name } = this.$store.getters.eventInformation
+    const plainTextBio = blocksToText(this.bio)
+    return {
+      title: `Sessions | ${name}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: plainTextBio
+        }
+      ]
+    }
   }
 }
 </script>
