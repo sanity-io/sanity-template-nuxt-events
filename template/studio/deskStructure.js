@@ -27,15 +27,6 @@ export default () =>
             .schemaType('codeOfConduct')
             .documentId('codeOfConduct')
         ),
-        S.listItem()
-        .title('Program')
-        .icon(MdSettings)
-        .child(
-          S.editor()
-            .id('program')
-            .schemaType('program')
-            .documentId('program')
-        ),
       S.listItem()
         .title('Persons')
         .icon(MdPerson)
@@ -45,6 +36,15 @@ export default () =>
         .title('Sessions')
         .schemaType('session')
         .child(S.documentTypeList('session').title('Sessions')),
+        S.listItem()
+        .title('Program')
+        .icon(MdSettings)
+        .child(
+          S.editor()
+            .id('program')
+            .schemaType('program')
+            .documentId('program')
+        ),
 
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
