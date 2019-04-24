@@ -8,7 +8,7 @@
           {{ session.summary }}
         </p>
       </nuxt-link>
-      <PersonsList :persons="session.persons" v-if="showPersons" />
+      <PersonsList v-if="showPersons" :persons="session.persons" />
     </li>
   </ul>
 </template>
