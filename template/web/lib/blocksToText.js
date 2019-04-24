@@ -1,6 +1,6 @@
 const defaults = { nonTextBehavior: 'remove' }
 
-export default function blocksToText(blocks, opts = {}) {
+export default function blocksToText(blocks = [], opts = {}) {
   const options = Object.assign({}, defaults, opts)
   return blocks
     .map(block => {

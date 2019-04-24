@@ -12,7 +12,7 @@
     </div>
 
     <figure :v-if="info.image">
-      <SanityImage :image="info.image" :width="1800" class="mainImage" />
+      <SanityImage :image="info.image" :width="600" class="mainImage" />
       <figcaption>{{ info.image.caption }}</figcaption>
     </figure>
 
@@ -25,12 +25,12 @@
 
 <script>
 import { dateFilter } from 'vue-date-fns'
-
+import groq from 'groq'
 import sanityClient from '../sanityClient'
 import SanityImage from '~/components/SanityImage'
 import Sessions from '~/components/Sessions'
 
-const query = `
+const query = groq`
   {
     "info": *[_id == "eventInformation"] {
       ..., image { ..., asset->}

@@ -8,13 +8,23 @@
           {{ session.summary }}
         </p>
       </nuxt-link>
+      <PersonsList :persons="session.persons" v-if="showPersons" />
     </li>
   </ul>
 </template>
 
 <script>
+import PersonsList from '~/components/PersonsList'
+
 export default {
+  components: {
+    PersonsList
+  },
   props: {
+    showPersons: {
+      type: Boolean,
+      default: false
+    },
     sessions: {
       type: Array,
       default: () => []
@@ -35,7 +45,8 @@ h3 {
 
 .session {
   display: flex;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  margin-bottom: 5rem;
 }
 
 .sessions a {

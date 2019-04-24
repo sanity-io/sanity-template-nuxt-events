@@ -11,13 +11,23 @@
 </template>
 
 <script>
+import groq from 'groq'
 import sanityClient from '~/sanityClient'
 import SessionList from '~/components/SessionList'
 
-const query = `
+const query = groq`
   {
     "sessions": *[_type == "session"] {
-      ..., speaker->
+      ...,
+      persons[] {
+        person-> {
+          ...,
+          image {
+            ...,
+            asset->
+          }
+        }
+      }
     }
   }
 `

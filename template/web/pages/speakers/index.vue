@@ -12,9 +12,10 @@
 </template>
 
 <script>
+import groq from 'groq'
 import sanityClient from '~/sanityClient'
 
-const query = `
+const query = groq`
   {
     "speakers": *[_type == "person"]
   }

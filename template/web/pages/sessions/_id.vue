@@ -11,18 +11,22 @@
 </template>
 
 <script>
+import groq from 'groq'
 import sanityClient from '~/sanityClient'
-
 import SanityImage from '~/components/SanityImage'
 import BlockContent from 'sanity-blocks-vue-component'
 
-const query = `
+const query = groq`
   *[_type == "session" && _id == $id] {
     ...,
-    person->,
-    image {
-      ...,
-      asset->
+    persons[] {
+      person-> {
+        ...,
+        image {
+          ...,
+          asset->
+        }
+      }
     }
   }[0]
 `
