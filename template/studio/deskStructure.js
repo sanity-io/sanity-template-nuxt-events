@@ -40,7 +40,7 @@ export default () =>
         .child(S.documentTypeList('person').title('Persons')),
         S.listItem()
         .title('Code of Conduct')
-        .icon(MdSettings)
+        .icon(MdGavel)
         .child(
           S.editor()
             .id('codeOfConduct')
