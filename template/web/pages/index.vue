@@ -11,7 +11,12 @@
     </div>
 
     <figure :v-if="info.image">
-      <SanityImage :image="info.image" :width="1800" class="mainImage" />
+      <SanityImage
+        :image="info.image"
+        :width="1800"
+        :height="500"
+        class="mainImage"
+      />
       <figcaption>{{ info.image.caption }}</figcaption>
     </figure>
 
@@ -141,28 +146,6 @@ export default {
 
 .top {
   text-align: center;
-}
-
-.title {
-  font-size: 12vw;
-  margin-bottom: 0.1em;
-  padding-bottom: 0;
-}
-
-.title + p {
-  font-size: 1.2em;
-  margin-top: 0;
-  font-weight: 300;
-  margin-bottom: 3rem;
-}
-
-@media screen and (min-width: 768px) {
-  .title {
-    font-size: 5rem;
-  }
-  .title + p {
-    font-size: 1.5rem;
-  }
 }
 
 .title + p + .dates {
