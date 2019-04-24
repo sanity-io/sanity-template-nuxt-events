@@ -1,7 +1,10 @@
+import icon from 'react-icons/lib/md/av-timer'
+
 export default {
   name: 'session',
   type: 'document',
   title: 'Session',
+  icon,
   fields: [
     {
       name: 'title',

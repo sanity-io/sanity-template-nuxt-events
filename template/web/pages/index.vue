@@ -200,7 +200,6 @@ li.session .meta {
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    flex-basis: 10rem;
     min-width: 7rem;
     overflow: hidden;
     box-sizing: border-box;
