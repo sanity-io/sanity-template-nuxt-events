@@ -17,7 +17,16 @@ import SessionList from '~/components/SessionList'
 const query = `
   {
     "sessions": *[_type == "session"] {
-      ..., speaker->
+      ...,
+      persons[] {
+        person-> {
+          ...,
+          image {
+            ...,
+            asset->
+          }
+        }
+      }
     }
   }
 `

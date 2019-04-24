@@ -12,7 +12,12 @@
     </div>
 
     <figure :v-if="info.image">
-      <SanityImage :image="info.image" :width="1800" class="mainImage" />
+      <SanityImage
+        :image="info.image"
+        :width="1800"
+        :height="500"
+        class="mainImage"
+      />
       <figcaption>{{ info.image.caption }}</figcaption>
     </figure>
 

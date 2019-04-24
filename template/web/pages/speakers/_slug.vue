@@ -38,12 +38,19 @@ export default {
     BlockContent,
     SessionList
   },
+  data() {
+    return {
+      name: undefined,
+      bio: [],
+      sessions: []
+    }
+  },
   async asyncData({ params }) {
     return await sanityClient.fetch(query, params)
   },
   head() {
     const { name } = this.$store.getters.eventInformation
-    const plainTextBio = blocksToText(this.bio)
+    const plainTextBio = this.bio && blocksToText(this.bio)
     return {
       title: `Sessions | ${name}`,
       meta: [

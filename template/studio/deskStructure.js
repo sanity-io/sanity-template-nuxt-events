@@ -1,6 +1,8 @@
 import S from '@sanity/desk-tool/structure-builder'
-import MdSettings from 'react-icons/lib/md/settings'
 import MdPerson from 'react-icons/lib/md/person'
+import MdEventNote from 'react-icons/lib/md/Event'
+import MdGavel from 'react-icons/lib/md/gavel'
+import MdInfo from 'react-icons/lib/md/info-outline'
 
 const hiddenDocTypes = listItem =>
   !['program','session','person','eventInformation', 'codeOfConduct'].includes(listItem.getId())
@@ -11,7 +13,7 @@ export default () =>
     .items([
       S.listItem()
         .title('Event information')
-        .icon(MdSettings)
+        .icon(MdInfo)
         .child(
           S.editor()
             .id('eventInformation')
@@ -24,7 +26,7 @@ export default () =>
         .child(S.documentTypeList('session').title('Sessions')),
         S.listItem()
         .title('Program')
-        .icon(MdSettings)
+        .icon(MdEventNote)
         .child(
           S.editor()
             .id('program')
