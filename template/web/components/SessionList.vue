@@ -8,39 +8,23 @@
           {{ session.summary }}
         </p>
       </nuxt-link>
-      <ul v-if="session.persons" class="persons">
-        <li
-          v-for="personRef in session.persons"
-          :key="personRef.person._id"
-          class="person"
-        >
-          <nuxt-link
-            :to="{ path: `/speakers/${personRef.person.slug.current}` }"
-          >
-            <SanityImage
-              :image="personRef.person.image"
-              :alt="personRef.person.image.alt"
-              :width="128"
-              :height="128"
-              fit="crop"
-              class="personImage"
-            />
-            {{ personRef.person.name }}
-          </nuxt-link>
-        </li>
-      </ul>
+      <PersonsList :persons="session.persons" v-if="showPersons" />
     </li>
   </ul>
 </template>
 
 <script>
-import SanityImage from '~/components/SanityImage'
+import PersonsList from '~/components/PersonsList'
 
 export default {
   components: {
-    SanityImage
+    PersonsList
   },
   props: {
+    showPersons: {
+      type: Boolean,
+      default: false
+    },
     sessions: {
       type: Array,
       default: () => []
@@ -74,8 +58,9 @@ h3 {
 }
 
 .session {
-  display: block;
-  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
 }
 
 .sessions a {

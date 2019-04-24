@@ -30,6 +30,9 @@ export default {
     }
   },
   data: function() {
+    const {
+      schedule: { from }
+    } = this.$store.getters.eventInformation
     return {
       /**
        * Calculates session time slot by looping trough all sessions
@@ -39,7 +42,7 @@ export default {
         const prevSession = allSessions[index - 1]
         const fromTime = prevSession
           ? addMinutes(prevSession.fromTime, prevSession.duration)
-          : this.info.from
+          : from
         return allSessions.concat([{ ...session, fromTime }])
       }, [])
     }

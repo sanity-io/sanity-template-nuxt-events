@@ -18,10 +18,11 @@
 </template>
 
 <script>
+import groq from 'groq'
 import sanityClient from '~/sanityClient'
 import SanityImage from '~/components/SanityImage'
 
-const query = `
+const query = groq`
   {
     "speakers": *[_type == "person"]
   }
