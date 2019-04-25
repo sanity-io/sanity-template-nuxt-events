@@ -1,5 +1,5 @@
 <template>
-  <img :src="imageUrl" :alt="alt" />
+  <img :src="imageUrl" :alt="altFromImage || alt" />
 </template>
 
 <script>
@@ -30,6 +30,9 @@ export default {
     }
   },
   computed: {
+    altFromImage: function() {
+      return this.image.alt
+    },
     imageUrl: function() {
       return builder
         .image(this.image)
