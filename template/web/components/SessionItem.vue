@@ -1,12 +1,15 @@
 <template>
   <li class="session">
     <div class="meta">
-      {{ scheduleItem.session.sessionType }}
       <div class="time">
         <TimeCalc
           :from-time="scheduleItem.fromTime"
           :duration="scheduleItem.duration"
         />
+      </div>
+      <div class="sessiontype">
+        {{ scheduleItem.session.sessionType }}<br />
+        {{ scheduleItem.duration }}min
       </div>
     </div>
     <div>
@@ -85,16 +88,18 @@ li.session .meta {
     padding: 0;
     margin-right: 1rem;
     padding-right: 1rem;
+    font-size: 1em;
     text-align: right;
-    font-size: 1.2em;
-    opacity: 0.5;
   }
 }
 
 @media screen and (min-width: 768px) {
+  li.session .meta .sessiontype {
+    opacity: 0.5;
+  }
   li.session .meta .time {
-    font-size: 0.7em;
-    margin-top: 1.27rem;
+    font-size: 1.2rem;
+    margin-bottom: 1em;
   }
 }
 
