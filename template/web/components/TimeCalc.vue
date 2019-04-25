@@ -1,5 +1,5 @@
 <template>
-  <span>{{ fromTime | dateFilter('h.mma') }} ({{ duration }}min)</span>
+  <span>{{ fromTime | dateFilter('h.mma') }}</span>
 </template>
 
 <script>
