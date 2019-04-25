@@ -34,6 +34,9 @@ export default {
     scheduleItem: {
       type: Object,
       default() {},
+      fromTime: {
+        type: Date
+      },
       session: {
         summary: {
           type: String,

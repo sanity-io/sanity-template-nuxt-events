@@ -2,21 +2,35 @@
   <ul v-if="filteredSessions" class="sessions">
     <li v-for="session in filteredSessions" :key="session._id" class="session">
       <nuxt-link :to="`/sessions/${session._id}`">
-        <span>{{ session.sessionType }}</span>
-        <h3>{{ session.title }}</h3>
+        <span class="top">
+          <span>
+            <span class="type">{{ session.sessionType }}</span>
+            <h3>{{ session.title }}</h3>
+          </span>
+          <span class="time">
+            {{ session.fromTime | date('HH:MM dddd DD MMM') }}
+          </span>
+        </span>
         <p>
           {{ session.summary }}
         </p>
       </nuxt-link>
-      <PersonsList v-if="showPersons" :persons="session.persons" />
+      <PersonsList
+        v-if="showPersons && session.persons"
+        :persons="session.persons"
+      />
     </li>
   </ul>
 </template>
 
 <script>
 import PersonsList from '~/components/PersonsList'
+import { dateFilter } from 'vue-date-fns'
 
 export default {
+  filters: {
+    date: dateFilter
+  },
   components: {
     PersonsList
   },
@@ -31,15 +45,19 @@ export default {
     }
   },
   computed: {
-    filteredSessions: data => {
-      console.log('filtered', data.sessions)
-      return data.sessions.map(session => {
+    filteredSessions: props => {
+      return props.sessions.map(session => {
         return {
           ...session,
-          persons: session.persons.filter(
-            person =>
-              person.person && person.person.slug && person.person.slug.current
-          )
+          ...session.session,
+          persons:
+            session.persons &&
+            session.persons.filter(
+              person =>
+                person.person &&
+                person.person.slug &&
+                person.person.slug.current
+            )
         }
       })
     }
@@ -64,19 +82,31 @@ h3 {
 }
 
 .sessions a {
-  display: flex;
   color: inherit;
   text-decoration: inherit;
-  flex-direction: column;
 }
 
-.sessions a span {
+.session .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sessions a > span {
+  display: block;
+}
+
+.sessions a span.type {
   text-transform: uppercase;
   font-size: 0.5em;
 }
 
 p {
   max-width: 30em;
+}
+
+.session .time {
+  margin-top: 1em;
+  font-size: 0.5em;
 }
 
 .session .persons {

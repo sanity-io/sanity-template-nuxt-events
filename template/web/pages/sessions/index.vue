@@ -3,39 +3,29 @@
     <h1 class="title">Sessions</h1>
     <div class="sessions">
       <SessionList
-        v-if="sessions"
-        :sessions="sessions.filter(s => s.sessionType !== 'break')"
+        v-if="sessionsWithoutBreak"
+        :sessions="sessionsWithoutBreak"
       />
     </div>
   </section>
 </template>
 
 <script>
-import groq from 'groq'
-import sanityClient from '~/sanityClient'
 import SessionList from '~/components/SessionList'
-
-const query = groq`
-  {
-    "sessions": *[_type == "session"] {
-      ...,
-      persons[] {
-        person-> {
-          ...,
-          image {
-            ...,
-            asset->
-          }
-        }
-      }
-    }
-  }
-`
 
 export default {
   components: { SessionList },
-  async asyncData() {
-    return await sanityClient.fetch(query)
+  data() {
+    return {
+      program: this.$store.getters.getProgram
+    }
+  },
+  computed: {
+    sessionsWithoutBreak: data => {
+      if (data.program && data.program.schedule) {
+        return data.program.schedule.filter(s => s.sessionType !== 'break')
+      }
+    }
   }
 }
 </script>

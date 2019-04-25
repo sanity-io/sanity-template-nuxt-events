@@ -39,25 +39,7 @@ const query = `
   {
     "info": *[_id == "eventInformation"] {
       ..., image { ..., asset->}
-    }[0],
-    "program": *[_id == "program"][0] {
-      ...,
-      schedule[] {
-        ...,
-        session-> {
-          ...,
-          persons[] {
-            person-> {
-              ...,
-              image {
-                ...,
-                asset->
-              }
-            }
-          }
-        }
-      }
-    }
+    }[0]
   }
 `
 
@@ -68,6 +50,11 @@ export default {
   },
   filters: {
     dateFilter
+  },
+  data() {
+    return {
+      program: this.$store.getters.getProgram
+    }
   },
   async asyncData() {
     return await sanityClient.fetch(query)
