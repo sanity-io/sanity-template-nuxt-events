@@ -23,7 +23,9 @@ export default {
   computed: {
     sessionsWithoutBreak: data => {
       if (data.program && data.program.schedule) {
-        return data.program.schedule.filter(s => s.sessionType !== 'break')
+        return data.program.schedule.filter(
+          i => i.session.sessionType !== 'break'
+        )
       }
     }
   }
@@ -31,15 +33,13 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  text-align: center;
-  font-size: 5rem;
-  margin-bottom: 4rem;
-  padding-bottom: 0;
+.container {
+  max-width: 50rem;
+  margin: 0 auto;
 }
 
-.sessions {
-  margin: 0 auto;
-  max-width: 30rem;
+.title {
+  text-align: center;
+  margin-bottom: 4rem;
 }
 </style>
