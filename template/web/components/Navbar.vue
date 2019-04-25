@@ -3,6 +3,7 @@
     <nuxt-link to="/" class="home">{{ title }}</nuxt-link>
     <nav>
       <nuxt-link to="/sessions">Sessions</nuxt-link>
+      <nuxt-link to="/speakers">Speakers</nuxt-link>
       <a v-if="ticketLink" :href="ticketLink">Tickets</a>
     </nav>
   </header>
