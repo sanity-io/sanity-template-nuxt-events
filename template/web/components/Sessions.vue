@@ -17,12 +17,16 @@ export default {
   },
   props: {
     info: {
+      type: Object,
+      default: () => {},
       from: {
         type: Date,
         default: () => new Date()
       }
     },
     program: {
+      type: Object,
+      default: () => {},
       schedule: {
         type: Array,
         default: () => []

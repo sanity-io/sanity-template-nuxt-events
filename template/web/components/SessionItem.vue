@@ -32,6 +32,8 @@ export default {
   },
   props: {
     scheduleItem: {
+      type: Object,
+      default() {},
       session: {
         summary: {
           type: String,
