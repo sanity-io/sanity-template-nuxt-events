@@ -5,10 +5,13 @@
         <span class="top">
           <span>
             <span class="type">{{ session.sessionType }}</span>
-            <h3>{{ session.title }}</h3>
+            <h2 class="sessionTitle">{{ session.title }}</h2>
           </span>
-          <span class="time">
-            {{ session.fromTime | date('HH:MM dddd DD MMM') }}
+          <span
+            class="time"
+            :title="session.fromTime | date('MMMM DD YYYY h:MM a')"
+          >
+            {{ session.fromTime | date('h:MM a') }}
           </span>
         </span>
         <p>
@@ -69,16 +72,19 @@ export default {
 .sessions {
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 4rem;
 }
 
-h3 {
+h2.sessionTitle {
   margin: 0;
+  margin-top: 0.75rem;
 }
 
 .session {
   display: flex;
   flex-direction: column;
-  margin-bottom: 5rem;
 }
 
 .sessions a {
@@ -97,7 +103,6 @@ h3 {
 
 .sessions a span.type {
   text-transform: uppercase;
-  font-size: 0.5em;
 }
 
 p {
@@ -105,8 +110,8 @@ p {
 }
 
 .session .time {
-  margin-top: 1em;
-  font-size: 0.5em;
+  margin-top: 0;
+  opacity: 0.5;
 }
 
 .session .persons {
