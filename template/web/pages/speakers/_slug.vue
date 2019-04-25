@@ -11,9 +11,13 @@
     <div :v-if="bio.length > 0">
       <BlockContent v-if="bio" :blocks="bio" />
     </div>
-    <div v-if="sessions" class="sessions">
+    <div v-if="scheduleItems" class="sessions">
       <h2>Sessions</h2>
-      <SessionList :sessions="sessions" :show-persons="false" />
+      <SessionItem
+        v-for="scheduleItem in scheduleItems"
+        :key="scheduleItem._key"
+        :schedule-item="scheduleItem"
+      />
     </div>
   </section>
 </template>
@@ -22,29 +26,38 @@
 import groq from 'groq'
 import sanityClient from '~/sanityClient'
 import SanityImage from '~/components/SanityImage'
-import SessionList from '~/components/SessionList'
+import SessionItem from '~/components/SessionItem'
 import BlockContent from 'sanity-blocks-vue-component'
 import blocksToText from '~/lib/blocksToText'
 
 const query = groq`
-  *[_type == "person" && slug.current == $slug][0] {
-    ...,
-    "sessions": *[_type == "session" && references(^._id)]
-  }
+  *[_type == "person" && slug.current == $slug][0] {..., "id": _id}
 `
 
 export default {
   components: {
     SanityImage,
     BlockContent,
-    SessionList
+    SessionItem
   },
   data() {
     return {
       name: undefined,
       bio: [],
-      sessions: [],
+      program: this.$store.getters.getProgram,
       plainTextBio: blocksToText(this.bio)
+    }
+  },
+  computed: {
+    scheduleItems: data => {
+      return data.program.schedule.filter(item => {
+        return (
+          item.session &&
+          item.session.persons &&
+          item.session.persons.filter(person => person.person._id === data.id)
+            .length > 0
+        )
+      })
     }
   },
   async asyncData({ params }) {
@@ -73,8 +86,9 @@ export default {
 
 .sessions {
   text-align: left;
-  max-width: 30rem;
+  max-width: 40rem;
   margin: 0 auto;
+  margin-top: 5rem;
 }
 
 .sessions h2 {
