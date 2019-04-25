@@ -12,7 +12,7 @@
         {{ scheduleItem.duration }}min
       </div>
     </div>
-    <div>
+    <div class="content">
       <h3>
         <nuxt-link :to="{ path: `/sessions/${scheduleItem.session._id}` }">{{
           scheduleItem.session.title || 'Undefined title'
@@ -80,8 +80,8 @@ li.session .meta {
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    flex-basis: 10rem;
     min-width: 7rem;
+    width: 7rem;
     overflow: hidden;
     box-sizing: border-box;
     margin: 0;
@@ -91,12 +91,15 @@ li.session .meta {
     font-size: 1em;
     text-align: right;
   }
-}
 
-@media screen and (min-width: 768px) {
+  li.session .content {
+    flex-grow: 1;
+  }
+
   li.session .meta .sessiontype {
     opacity: 0.5;
   }
+
   li.session .meta .time {
     font-size: 1.2rem;
     margin-bottom: 1em;
