@@ -5,16 +5,21 @@
       <p class="sessionType">{{ sessionType }}</p>
       <h1>{{ title }}</h1>
       <p class="summary">{{ summary }}</p>
-      <BlockContent :blocks="description" :v-if="description" />
+      <BlockContent
+        :blocks="description"
+        :v-if="description"
+        :serializers="serializers"
+      />
     </section>
   </div>
 </template>
 
 <script>
+import BlockContent from 'sanity-blocks-vue-component'
 import groq from 'groq'
 import sanityClient from '~/sanityClient'
 import SanityImage from '~/components/SanityImage'
-import BlockContent from 'sanity-blocks-vue-component'
+import PersonBlock from '~/components/blockContent/PersonBlock'
 
 const query = groq`
   *[_type == "session" && _id == $id] {
@@ -35,6 +40,15 @@ export default {
   components: {
     BlockContent,
     SanityImage
+  },
+  data() {
+    return {
+      serializers: {
+        types: {
+          personReference: PersonBlock
+        }
+      }
+    }
   },
   async asyncData({ params }) {
     return await sanityClient.fetch(query, params)
