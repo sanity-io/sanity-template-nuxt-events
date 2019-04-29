@@ -17,8 +17,7 @@ export default {
     {
       name: 'image',
       type: 'mainImage',
-      title: 'Event image',
-      description: 'The highest resolution'
+      title: 'Event image'
     },
     {
       name: 'schedule',
