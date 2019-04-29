@@ -13,7 +13,9 @@ export default {
     },
     {
       name: 'image',
-      type: 'image',
+      type: 'mainImage',
+      title: 'Image',
+
     },
     {
       name: 'persons',
@@ -59,7 +61,7 @@ export default {
       title: 'title',
       sessionType: 'sessionType',
       person: 'person.name',
-      media: 'person.image'
+      media: 'image'
     },
     prepare ({title, media, sessionType, person}) {
       return {
