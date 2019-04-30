@@ -5,7 +5,7 @@
     "private": false
   },
   "sanity": {
-    "dataset": "production",
+    "dataset": "events",
     "projectId": "pgf31hzf",
     "projectTitle": "Nuxt.js Event site"
   },
