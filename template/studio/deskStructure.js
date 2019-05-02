@@ -1,6 +1,6 @@
 import S from '@sanity/desk-tool/structure-builder'
 import MdPerson from 'react-icons/lib/md/person'
-import MdEventNote from 'react-icons/lib/md/Event'
+import MdEventNote from 'react-icons/lib/md/event'
 import MdGavel from 'react-icons/lib/md/gavel'
 import MdInfo from 'react-icons/lib/md/info-outline'
 
