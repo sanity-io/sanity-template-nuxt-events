@@ -22,41 +22,56 @@ export default {
 </script>
 
 <style>
+@import '../styles/custom-media.css';
+@import '../styles/custom-properties.css';
+
 html {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 18px;
-  max-width: 100vw;
-  overflow-x: hidden;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-base-size);
+  line-height: var(--font-base-line-height);
 }
 
-section {
-  padding: 1rem;
+body {
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-white);
+  color: var(--color-black);
+  margin: 0;
+}
+
+html,
+body,
+#__nuxt,
+#__layout,
+#__layout > div {
+  height: 100%;
 }
 
 .title {
-  font-size: 12vw;
-  margin-bottom: 0.1em;
+  font-weight: 600;
+  font-size: var(--font-title2-size);
+  line-height: var(--font-title2-line-height);
+  margin-bottom: 0.25rem;
   padding-bottom: 0;
+
+  @nest & strong {
+    background: #fe0;
+  }
+
+  @media (--media-min-medium) {
+    font-size: var(--font-title1-size);
+    line-height: var(--font-title1-line-height);
+  }
 }
 
 .title + p {
-  font-size: 1.2em;
+  font-size: var(--font-large-size);
+  line-height: var(--font-large-line-height);
   margin-top: 0;
-  font-weight: 300;
-  margin-bottom: 3rem;
-}
+  margin-bottom: 4rem;
 
-@media screen and (min-width: 768px) {
-  .title {
-    font-size: 5rem;
-  }
-  .title + p {
-    font-size: 1.5rem;
+  @media (--media-min-medium) {
+    font-size: var(--font-title3-size);
+    line-height: var(--font-title3-line-height);
   }
 }
 </style>

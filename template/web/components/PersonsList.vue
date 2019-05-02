@@ -31,20 +31,19 @@ export default {
 }
 </script>
 <style scoped>
+@import '../styles/custom-properties.css';
+
 .session .persons {
-  color: #666;
-  display: flex;
-  margin: 0;
+  margin: 1rem 0 0;
   padding: 0;
-  font-size: 0.8em;
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
 }
 
 .session .persons .person {
   display: flex;
-  margin: 0;
+  margin: 0.5rem 0 0;
   padding: 0;
-  margin-right: 2em;
-  margin-top: 2em;
   align-items: center;
 }
 
@@ -52,11 +51,12 @@ export default {
   display: contents;
   color: inherit;
   text-decoration: inherit;
+  line-height: 1.75;
 }
 
 .personImage {
-  height: 2em;
-  margin-right: 0.5em;
+  height: 1.75rem;
+  margin-right: 0.5rem;
   border-radius: 50%;
 }
 </style>

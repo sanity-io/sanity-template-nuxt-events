@@ -1,15 +1,15 @@
 <template>
-  <section>
-    <div class="container top">
+  <section class="container">
+    <header class="header">
       <h1 class="title">{{ info.name }}</h1>
       <p class="subtitle">{{ info.description }}</p>
       <div class="dates">
         {{ new Date(info.schedule.from) | dateFilter('DD MMMM ha') }}
-        -
+        &ndash;
         {{ new Date(info.schedule.to) | dateFilter('ha') }}
       </div>
       <div class="venue">{{ info.venue.name }}, {{ info.venue.city }}</div>
-    </div>
+    </header>
 
     <figure :v-if="info.image">
       <SanityImage
@@ -21,9 +21,9 @@
       <figcaption>{{ info.image.caption }}</figcaption>
     </figure>
 
-    <div class="container">
-      <h2 class="sessions-title">Schedule</h2>
-      <Sessions :program="program" :info="info" />
+    <div class="sessionListContainer">
+      <h2 class="sessionListTitle">Schedule</h2>
+      <SessionList :program="program" :info="info" />
     </div>
   </section>
 </template>
@@ -33,7 +33,7 @@ import { dateFilter } from 'vue-date-fns'
 
 import sanityClient from '../sanityClient'
 import SanityImage from '~/components/SanityImage'
-import Sessions from '~/components/Sessions'
+import SessionList from '~/components/SessionList'
 
 const query = `
   {
@@ -46,7 +46,7 @@ const query = `
 export default {
   components: {
     SanityImage,
-    Sessions
+    SessionList
   },
   filters: {
     dateFilter
@@ -83,130 +83,63 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/custom-media.css';
+@import '../styles/custom-properties.css';
+
 .container {
-  max-width: 45rem;
-  margin: 0 auto;
+  padding: 1.5rem 0;
+  box-sizing: border-box;
+  min-height: calc(100% - 72px - 216px);
 }
 
-.top {
+.header {
+  padding: 0 1.5rem;
   text-align: center;
 }
 
 .title + p + .dates {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  font-weight: 600;
 }
 
 .title + p + .dates + .venue {
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
   margin-bottom: 5rem;
 }
 
 figure {
-  margin: 0;
-  margin-bottom: 3rem;
+  margin: 0 0 3em;
 }
 
 figcaption {
-  font-size: 0.8em;
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+  padding: 0.25rem 1.5rem;
 }
 
 .mainImage {
-  width: 100vw;
-  margin-left: -1rem;
+  width: 100%;
+  vertical-align: top;
 }
 
-.sessions-title {
+.sessionListTitle {
   text-align: center;
-  margin-bottom: 3em;
-}
+  font-weight: 600;
+  font-size: var(--font-title2-size);
+  line-height: var(--font-title2-line-height);
+  margin: 0 0 3rem;
 
-ul.sessions {
-  margin: 0;
-  padding: 0;
-}
-
-li.session {
-  display: block;
-  margin-bottom: 5rem;
-}
-
-@media screen and (min-width: 768px) {
-  li.session {
-    display: flex;
-    align-items: baseline;
+  @media (--media-min-medium) {
+    font-size: var(--font-title1-size);
+    line-height: var(--font-title1-line-height);
   }
 }
 
-li.session .meta {
-  display: flex;
-  justify-content: space-between;
-  text-transform: capitalize;
-  font-size: 0.8em;
-}
-
-@media screen and (min-width: 768px) {
-  li.session .meta {
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    min-width: 7rem;
-    overflow: hidden;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    margin-right: 1rem;
-    padding-right: 1rem;
-    text-align: right;
-    font-size: 1.2em;
-    opacity: 0.5;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  li.session .meta .time {
-    font-size: 0.7em;
-    margin-top: 1.27rem;
-  }
-}
-
-li.session h3 {
-  margin-top: 0;
-}
-
-li.session h3 a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-li.session h3 + p {
-  margin: 0;
-}
-
-.session .persons {
-  color: #666;
-  display: flex;
-  margin: 0;
-  padding: 0;
-  font-size: 0.8em;
-}
-
-.session .persons .person {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  margin-right: 2em;
-  margin-top: 2em;
-  align-items: center;
-}
-
-.session .persons .person a {
-  display: contents;
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.personImage {
-  height: 2em;
-  margin-right: 0.5em;
-  border-radius: 50%;
+.sessionListContainer {
+  max-width: var(--width-small);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 </style>

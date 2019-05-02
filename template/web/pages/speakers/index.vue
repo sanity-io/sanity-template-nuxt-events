@@ -39,25 +39,43 @@ export default {
 </script>
 
 <style scoped>
+@import '../../styles/custom-properties.css';
+
 .container {
   text-align: center;
+  padding: 1.5rem 0;
+  box-sizing: border-box;
+  min-height: calc(100% - 72px - 216px);
 }
 
 .title {
-  margin-bottom: 1em;
+  margin-bottom: 4rem;
 }
 
 .speakers {
   display: grid;
-  margin: 0;
-  padding: 1rem;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: var(--width-medium);
   grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
 }
 
 .speaker {
   display: block;
   position: relative;
-  margin-bottom: 6em;
+  margin-bottom: 4em;
+
+  @nest & > a {
+    display: block;
+    padding: 1.5rem;
+  }
+
+  @nest & .name {
+    font-weight: 600;
+    font-size: var(--font-title3-size);
+    line-height: var(--font-title3-line-height);
+  }
 }
 
 .speaker a {

@@ -47,6 +47,7 @@ export default {
 .title {
   margin-bottom: 0.5em;
 }
+
 .container {
   max-width: 40rem;
   padding: 0 1rem;

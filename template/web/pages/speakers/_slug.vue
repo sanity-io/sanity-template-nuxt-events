@@ -7,8 +7,8 @@
       :width="1200"
       class="image"
     />
-    <h1>{{ name }}</h1>
-    <div :v-if="bio.length > 0">
+    <h1 class="title">{{ name }}</h1>
+    <div class="bio" :v-if="bio.length > 0">
       <BlockContent v-if="bio" :blocks="bio" />
     </div>
     <div v-if="scheduleItems" class="sessions">
@@ -80,8 +80,28 @@ export default {
 </script>
 
 <style scoped>
+@import '../../styles/custom-media.css';
+@import '../../styles/custom-properties.css';
+
 .container {
   text-align: center;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+  min-height: calc(100% - 72px - 216px);
+}
+
+.bio {
+  font-size: var(--font-large-size);
+  line-height: var(--font-large-line-height);
+
+  @nest & p {
+    margin: 0.25rem 0 0.5rem;
+  }
+
+  @media (--media-min-medium) {
+    font-size: var(--font-title3-size);
+    line-height: var(--font-title3-line-height);
+  }
 }
 
 .sessions {
@@ -93,16 +113,15 @@ export default {
 
 .sessions h2 {
   text-align: center;
+  margin: 4rem 0 2rem;
+  font-weight: 600;
+  font-size: var(--font-title2-size);
+  line-height: var(--font-title2-line-height);
 }
 
 .image {
   border-radius: 50%;
-  margin: 2rem;
   max-width: 20rem;
   width: 50vw;
-}
-
-h2 {
-  margin-top: 2em;
 }
 </style>

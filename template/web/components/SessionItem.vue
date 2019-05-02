@@ -8,7 +8,7 @@
         />
       </div>
       <div class="sessiontype">
-        {{ scheduleItem.session.sessionType }}<br />
+        {{ scheduleItem.session.sessionType }} &middot;
         {{ scheduleItem.duration }}min
       </div>
     </div>
@@ -56,12 +56,15 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/custom-media.css';
+@import '../styles/custom-properties.css';
+
 li.session {
   display: block;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
 }
 
-@media screen and (min-width: 768px) {
+@media (--media-min-medium) {
   li.session {
     display: flex;
     align-items: baseline;
@@ -72,7 +75,14 @@ li.session .meta {
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
-  font-size: 0.8em;
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
+  margin-bottom: 0.5rem;
+  color: var(--color-gray);
+}
+
+li.session .meta .sessiontype {
+  text-align: right;
 }
 
 @media screen and (min-width: 768px) {
@@ -80,8 +90,8 @@ li.session .meta {
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    min-width: 7rem;
-    width: 7rem;
+    min-width: 10rem;
+    width: 10rem;
     overflow: hidden;
     box-sizing: border-box;
     margin: 0;
@@ -96,18 +106,18 @@ li.session .meta {
     flex-grow: 1;
   }
 
-  li.session .meta .sessiontype {
-    opacity: 0.5;
-  }
-
   li.session .meta .time {
-    font-size: 1.2rem;
-    margin-bottom: 1em;
+    font-size: var(--font-title3-size);
+    line-height: var(--font-title3-line-height);
+    margin-bottom: 0.5rem;
   }
 }
 
 li.session h3 {
-  margin-top: 0;
+  font-size: var(--font-title3-size);
+  line-height: var(--font-title3-line-height);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
 }
 
 li.session h3 a {

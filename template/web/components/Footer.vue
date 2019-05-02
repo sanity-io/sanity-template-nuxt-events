@@ -44,26 +44,24 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/custom-properties.css';
+
 .footer {
-  background-color: #eee;
-  margin-top: 1rem;
-  padding: 2rem;
-  padding-top: 4rem;
-  padding-bottom: 3rem;
+  padding: 1.5rem;
   text-align: center;
-  font-size: 0.8em;
+  font-size: var(--font-small-size);
+  line-height: var(--font-small-line-height);
 }
 
 .footer a {
   color: inherit;
   text-decoration: inherit;
-  padding: 1em;
+  padding: 1em 0.5em;
 }
 
 address.venue {
-  margin: 1em;
-  margin-top: 3em;
-  font-style: normal;
+  margin: 3em 1.5em 1.5em;
+  font-style: inherit;
 }
 
 .power a {

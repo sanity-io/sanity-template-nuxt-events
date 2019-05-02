@@ -25,8 +25,13 @@ export default {
 </script>
 
 <style scoped>
+@import '../styles/custom-properties.css';
+
 .header {
-  padding: 1rem;
+  padding: 1.5rem;
+  max-width: var(--width-medium);
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 520px) {
@@ -53,7 +58,6 @@ export default {
 }
 
 .home {
-  font-weight: 800;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 </style>

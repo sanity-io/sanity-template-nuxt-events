@@ -1,8 +1,8 @@
 <template>
   <section class="container">
     <h1 class="title">Sessions</h1>
-    <div class="sessions">
-      <SessionList
+    <div class="sessionGridContainer">
+      <SessionGrid
         v-if="sessionsWithoutBreak"
         :sessions="sessionsWithoutBreak"
       />
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import SessionList from '~/components/SessionList'
+import SessionGrid from '~/components/SessionGrid'
 
 export default {
-  components: { SessionList },
+  components: { SessionGrid },
   data() {
     return {
       program: this.$store.getters.getProgram
@@ -33,13 +33,23 @@ export default {
 </script>
 
 <style scoped>
+@import '../../styles/custom-properties.css';
+
 .container {
-  max-width: 50rem;
-  margin: 0 auto;
+  padding: 1.5rem 0;
+  box-sizing: border-box;
+  min-height: calc(100% - 72px - 216px);
 }
 
 .title {
   text-align: center;
   margin-bottom: 4rem;
+}
+
+.sessionGridContainer {
+  max-width: var(--width-medium);
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 </style>
