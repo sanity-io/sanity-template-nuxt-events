@@ -4,7 +4,7 @@
   "description": "A website for listing events and happenings.",
   "previewMedia": {
     "type": "image",
-    "src": "assets/preview-00.jpg",
+    "src": "assets/frontend.jpg",
     "alt": "A screenshot of the Events with Nuxt.js application."
   },
   "technologies": [
@@ -62,7 +62,7 @@
       },
       "previewMedia": {
         "type": "image",
-        "src": "assets/preview-00.jpg",
+        "src": "assets/frontend.jpg",
         "alt": "A mock preview image"
       }
     }
