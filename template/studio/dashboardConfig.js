@@ -1,7 +1,12 @@
 export default {
   widgets: [
-    {name: 'structure-menu'},
-    {name: 'sanity-tutorials'},
+    {
+      name: 'sanity-tutorials',
+      options: {
+        templateRepoId: 'sanity-io/sanity-template-nextjs-landing-pages'
+      }
+    },
+    { name: 'structure-menu' },
     {
       name: 'project-info',
       options: {
@@ -27,14 +32,14 @@ export default {
         ]
       }
     },
-    {name: 'project-users', layout: {height: 'auto'}},
+    { name: 'project-users', layout: { height: 'auto' } },
     {
       name: 'document-list',
-      options: {title: 'Recently edited', order: '_updatedAt desc', limit: 10}
+      options: { title: 'Recently edited', order: '_updatedAt desc', limit: 10 }
     },
     {
       name: 'document-list',
-      options: {title: 'Recent blog posts', order: '_createdAt desc', limit: 10, types: ['post']}
+      options: { title: 'Recent blog posts', order: '_createdAt desc', limit: 10, types: ['post'] }
     }
   ]
 }
