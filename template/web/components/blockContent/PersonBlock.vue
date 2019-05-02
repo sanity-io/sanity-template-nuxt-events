@@ -19,12 +19,10 @@ export default {
   },
   computed: {
     personName: props => {
-      console.log(props.person)
       return props.person.name
     },
     currentSlug: ({ person }) => {
       const { slug } = person
-      console.log('slug', slug)
       if (slug && slug.current) {
         return slug.current
       }

@@ -29,7 +29,6 @@ function populateWithDates(program, from) {
    * Calculates session time slot by looping trough all sessions
    * adding their duration to their start time.
    */
-  console.log('populateWithDates', from)
   const schedule = program.schedule.reduce((allSessions, session, index) => {
     const prevSession = allSessions[index - 1]
     const fromTime = prevSession
