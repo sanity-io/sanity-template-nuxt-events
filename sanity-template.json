@@ -33,7 +33,7 @@
         "requirements": ["build-hook"],
         "config": {
           "cmd": "npm run build-web",
-          "dir": "web/public"
+          "dir": "web/dist"
         }
       },
       "preview": {
