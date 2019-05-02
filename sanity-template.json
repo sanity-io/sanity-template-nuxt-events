@@ -2,6 +2,23 @@
   "version": 1,
   "title": "Events with Nuxt.js",
   "description": "A website for listing events and happenings.",
+  "previewMedia": {
+    "type": "image",
+    "src": "assets/preview-00.jpg",
+    "alt": "A screenshot of the Events with Nuxt.js application."
+  },
+  "technologies": [
+    {
+      "id": "nuxt",
+      "name": "Nuxt.js",
+      "url": "https://nuxtjs.org/"
+    },
+    {
+      "id": "netlify",
+      "name": "Netlify",
+      "url": "https://www.netlify.com/"
+    }
+  ],
   "deployments": [
     {
       "id": "studio",
@@ -15,6 +32,11 @@
           "cmd": "npm run build && cp ./netlify.toml dist",
           "dir": "studio/dist"
         }
+      },
+      "previewMedia": {
+        "type": "image",
+        "src": "assets/studio-00.png",
+        "alt": "A mock preview image"
       }
     },
     {
@@ -36,25 +58,11 @@
           "dir": "web/dist"
         }
       },
-      "preview": {
-        "images": [
-          { "src": "assets/preview-00.jpg", "alt": "A mock preview image" }
-        ]
+      "previewMedia": {
+        "type": "image",
+        "src": "assets/preview-00.jpg",
+        "alt": "A mock preview image"
       }
     }
-  ],
-  "metadata": {
-    "technologies": [
-      {
-        "id": "nuxt",
-        "name": "Nuxt.js",
-        "url": "https://nuxtjs.org/"
-      },
-      {
-        "id": "netlify",
-        "name": "Netlify",
-        "url": "https://www.netlify.com/"
-      }
-    ]
-  }
+  ]
 }
