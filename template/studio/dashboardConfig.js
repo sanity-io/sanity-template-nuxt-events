@@ -3,7 +3,7 @@ export default {
     {
       name: 'sanity-tutorials',
       options: {
-        templateRepoId: 'sanity-io/sanity-template-nextjs-landing-pages'
+        templateRepoId: 'sanity-io/sanity-template-nuxt-events'
       }
     },
     { name: 'structure-menu' },
