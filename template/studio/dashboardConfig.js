@@ -42,7 +42,7 @@ export default {
     {name: 'project-users', layout: {height: 'auto'}},
     {
       name: 'document-list',
-      options: {title: 'Recent blog posts', order: '_createdAt desc', types: ['post']},
+      options: {title: 'Recently created sessions', order: '_createdAt desc', types: ['session']},
       layout: {width: 'medium'}
     }
   ]
