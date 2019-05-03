@@ -24,14 +24,13 @@ export default {
     select: {
       session: 'session.title',
       sessionType: 'session.sessionType',
-      duration: 'duration',
+      duration: 'duration'
     },
-    prepare({session, sessionType, duration}) {
+    prepare ({session, sessionType, duration}) {
       return {
         title: session,
         subtitle: `${sessionType} - ${duration} ${duration.length > 1 ? 'mins' : 'min'}`
       }
     }
   }
-
 }

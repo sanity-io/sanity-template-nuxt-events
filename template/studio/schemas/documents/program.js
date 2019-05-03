@@ -7,14 +7,14 @@ export default {
       name: 'schedule',
       type: 'array',
       title: 'Schedule',
-      of: [{ type: 'scheduleItem' }]
+      of: [{type: 'scheduleItem'}]
     }
   ],
   preview: {
     select: {
       schedule: 'schedule'
     },
-    prepare ({ schedule }) {
+    prepare ({schedule}) {
       const sessionTotal = schedule.length
       return {
         title: `The program - ${sessionTotal} session${sessionTotal > 1 && 's'}`

@@ -41,7 +41,7 @@ export default {
       type: 'array',
       title: 'Keywords',
       description: 'Add keywords that describes your event.',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
       options: {
         layout: 'tags'
       }
@@ -55,7 +55,7 @@ export default {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'person' }]
+          to: [{type: 'person'}]
         }
       ]
     }

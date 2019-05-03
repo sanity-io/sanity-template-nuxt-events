@@ -5,16 +5,17 @@ export default {
   fields: [
     {
       name: 'body',
-      description: 'A code of conduct is one of several things that helps you to make sure that all participants will have a great time!',
+      description:
+        'A code of conduct is one of several things that helps you to make sure that all participants will have a great time!',
       type: 'bodyPortableText',
       title: 'Code of Conduct'
-    },
+    }
   ],
   preview: {
     select: {
       body: 'body'
     },
-    prepare({body = []}) {
+    prepare ({body = []}) {
       const block = body.find(block => block._type === 'block')
       return {
         title: block
