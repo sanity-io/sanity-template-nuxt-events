@@ -6,7 +6,7 @@ export default {
         templateRepoId: 'sanity-io/sanity-template-nuxt-events'
       }
     },
-    { name: 'structure-menu' },
+    {name: 'structure-menu'},
     {
       name: 'project-info',
       options: {
@@ -14,32 +14,36 @@ export default {
           {
             name: 'netlify',
             options: {
-              title: 'Netlify',
               sites: [
                 {
-                  buildHookId: '<#<deployments.studio.provider.buildHookId>#>',
+                  buildHookId: '<#<deployments.studio.providerInfo.buildHookId>#>',
                   name: 'Content Studio',
-                  siteId: '<#<deployments.studio.provider.buildHookId>#>'
+                  siteId: '<#<deployments.studio.providerInfo.siteId>#>'
                 },
                 {
-                  buildHookId: '<#<deployments.web.provider.buildHookId>#>',
-                  name: 'Content Studio',
-                  siteId: '<#<deployments.web.provider.buildHookId>#>'
+                  buildHookId: '<#<deployments.web.providerInfo.buildHookId>#>',
+                  name: 'Blog Website',
+                  siteId: '<#<deployments.web.providerInfo.siteId>#>'
                 }
               ]
             }
           }
+        ],
+        data: [
+          {
+            title: 'GitHub repo',
+            value: 'https://github.com/<#<repository.owner>#>/<#<repository.name>#>',
+            category: 'Code'
+          },
+          {title: 'Frontend', value: '<#<deployments.web.url>#>', category: 'apps'}
         ]
       }
     },
-    { name: 'project-users', layout: { height: 'auto' } },
+    {name: 'project-users', layout: {height: 'auto'}},
     {
       name: 'document-list',
-      options: { title: 'Recently edited', order: '_updatedAt desc', limit: 10 }
-    },
-    {
-      name: 'document-list',
-      options: { title: 'Recent blog posts', order: '_createdAt desc', limit: 10, types: ['post'] }
+      options: {title: 'Recent blog posts', order: '_createdAt desc', types: ['post']},
+      layout: {width: 'medium'}
     }
   ]
 }
