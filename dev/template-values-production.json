@@ -17,7 +17,7 @@
   "userInput": {},
   "deployments": {
     "studio": {
-      "title": "Content Studio",
+      "title": "Sanity Studio",
       "url": "https://path-to-studio",
       "provider": {
         "name": "netlify",

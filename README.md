@@ -2,7 +2,7 @@
 
 This template repo is used by [Sanity.io](https://www.sanity.io) to easily create deployed and configured projects through a web interface. You can test it by [creating this project](https://www.sanity.io/create/?template=sanity-io%2Fsanity-template-nuxt-events).
 
-The template contains both a Sanity.io Content Studio and a front-end in [Nuxt](https://nuxtjs.org). Both are deployed on [Netlify](https://netlify.com).
+The template contains both a Sanity.io Sanity Studio and a front-end in [Nuxt](https://nuxtjs.org). Both are deployed on [Netlify](https://netlify.com).
 
 Feel free to clone this template to create your own automagic project creation experiences.
 
