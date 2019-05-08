@@ -64,7 +64,13 @@
         "type": "image",
         "src": "assets/frontend.jpg",
         "alt": "A mock preview image"
-      }
+      },
+      "requiredCorsOrigins": [
+        {
+          "origin": "http://localhost:3000",
+          "allowCredentials": true
+        }
+      ]
     }
   ]
 }
