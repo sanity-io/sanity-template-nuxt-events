@@ -1,10 +1,12 @@
 # sanity-template-nuxt-events
 
+_Data-driven conference website in Vue.js. Speakers, sessions, and scheduling._
+
 This template repo is used by [Sanity.io](https://www.sanity.io) to easily create deployed and configured projects through a web interface. You can test it by [creating this project](https://www.sanity.io/create/?template=sanity-io%2Fsanity-template-nuxt-events).
 
 The template contains both a Sanity.io Sanity Studio and a front-end in [Nuxt](https://nuxtjs.org). Both are deployed on [Netlify](https://netlify.com).
 
-Feel free to clone this template to create your own automagic project creation experiences.
+Want to make a template for Sanity and your favourite front-end framework? We’re still maturing [sanity.io/create](https://sanity.io/create) and our APIs, but do tell us about it on [slack.sanity.io](https://slack.sanity.io).
 
 ![The Sanity and Nuxt.js powered events website](https://github.com/sanity-io/sanity-template-nuxt-events/blob/master/assets/frontend.jpg?raw=true)
 
