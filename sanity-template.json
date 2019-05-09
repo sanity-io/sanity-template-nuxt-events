@@ -1,7 +1,7 @@
 {
   "version": 1,
   "title": "Events with Nuxt.js",
-  "description": "A website for listing events and happenings.",
+  "description": "Data-driven conference website in Vue.js. Speakers, sessions, and scheduling.",
   "previewMedia": {
     "type": "image",
     "src": "assets/frontend.jpg",
@@ -64,7 +64,13 @@
         "type": "image",
         "src": "assets/frontend.jpg",
         "alt": "A mock preview image"
-      }
+      },
+      "requiredCorsOrigins": [
+        {
+          "origin": "http://localhost:3000",
+          "allowCredentials": false
+        }
+      ]
     }
   ]
 }
