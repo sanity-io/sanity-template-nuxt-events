@@ -2,6 +2,7 @@ export default {
   name: 'codeOfConduct',
   type: 'document',
   title: 'Code of Conduct',
+  __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   fields: [
     {
       name: 'body',
