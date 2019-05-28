@@ -2,6 +2,7 @@ export default {
   name: 'eventInformation',
   type: 'document',
   title: 'Event Information',
+  __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   fields: [
     {
       name: 'name',
