@@ -45,6 +45,6 @@ export default createSchema({
     bioPortableText,
     bodyPortableText,
     eventReference,
-    personReference,
+    personReference
   ])
 })
