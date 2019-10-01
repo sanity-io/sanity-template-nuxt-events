@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "sanity-nuxt-events-web",
   "version": "1.0.0",
   "description": "An event website powered by Nuxt and Sanity.io",
   "author": "Sanity.io",
