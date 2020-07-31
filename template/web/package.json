@@ -1,6 +1,6 @@
 {
   "name": "sanity-nuxt-events-web",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "An event website powered by Nuxt and Sanity.io",
   "author": "Sanity.io",
   "private": true,
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^2.6.0",
-    "@sanity/client": "^1.149.16",
+    "@sanity/client": "^1.149.18",
     "@sanity/image-url": "^0.140.19",
     "cross-env": "^5.2.0",
     "groq": "^0.140.0",
