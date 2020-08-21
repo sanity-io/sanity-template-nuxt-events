@@ -5,8 +5,8 @@
       <li v-for="speaker in speakers" :key="speaker._id" class="speaker">
         <nuxt-link :to="{ path: `/speakers/${speaker.slug.current}` }">
           <SanityImage
-            width="256"
-            height="256"
+            :width="256"
+            :height="256"
             :image="speaker.image"
             class="avatar"
           />

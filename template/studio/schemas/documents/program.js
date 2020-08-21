@@ -2,7 +2,7 @@ export default {
   name: 'program',
   type: 'document',
   title: 'Program',
-  __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
+  __experimental_actions: ['update', /* 'create', 'delete', */ 'publish'],
   fields: [
     {
       name: 'schedule',

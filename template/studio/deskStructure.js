@@ -5,7 +5,7 @@ import MdGavel from 'react-icons/lib/md/gavel'
 import MdInfo from 'react-icons/lib/md/info-outline'
 
 const hiddenDocTypes = listItem =>
-  !['program','session','person','eventInformation', 'codeOfConduct'].includes(listItem.getId())
+  !['program', 'session', 'person', 'eventInformation', 'codeOfConduct'].includes(listItem.getId())
 
 export default () =>
   S.list()
@@ -20,11 +20,11 @@ export default () =>
             .schemaType('eventInformation')
             .documentId('eventInformation')
         ),
-        S.listItem()
+      S.listItem()
         .title('Sessions')
         .schemaType('session')
         .child(S.documentTypeList('session').title('Sessions')),
-        S.listItem()
+      S.listItem()
         .title('Program')
         .icon(MdEventNote)
         .child(
@@ -33,12 +33,12 @@ export default () =>
             .schemaType('program')
             .documentId('program')
         ),
-        S.listItem()
+      S.listItem()
         .title('Persons')
         .icon(MdPerson)
         .schemaType('person')
         .child(S.documentTypeList('person').title('Persons')),
-        S.listItem()
+      S.listItem()
         .title('Code of Conduct')
         .icon(MdGavel)
         .child(
