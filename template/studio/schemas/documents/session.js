@@ -1,4 +1,4 @@
-import icon from 'react-icons/lib/md/av-timer'
+import { MdAvTimer as icon } from "react-icons/md";
 
 export default {
   name: 'session',
