@@ -10,6 +10,7 @@
     "typecheck": "nuxi typecheck"
   },
   "dependencies": {
+    "@nuxt/ui-templates": "npm:@nuxt/ui-templates-edge@latest",
     "@nuxtjs/eslint-config-typescript": "^9.0.0",
     "@nuxtjs/sanity": "^1.1.1",
     "@nuxtjs/tailwindcss": "^5.0.2",
@@ -21,8 +22,6 @@
   "devDependencies": {
     "eslint": "^8.12.0",
     "eslint-plugin-nuxt": "^3.2.0",
-    "prettier": "^2.6.1",
-    "prettier-plugin-tailwindcss": "^0.1.8",
     "sanity-codegen": "^0.9.8"
   }
 }

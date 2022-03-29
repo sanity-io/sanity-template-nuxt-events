@@ -12,7 +12,10 @@ export default {
        * refactor this validation to make sure that the from
        * date is before the to date and so on.
        */
-      return isSameDay(schedule.from, schedule.to) || 'Only one-day events are supported'
+       return (
+        isSameDay(new Date(schedule.from), new Date(schedule.to)) ||
+        'Only one-day events are supported'
+      )
     }),
   fields: [
     {
