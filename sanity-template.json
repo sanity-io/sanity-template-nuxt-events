@@ -26,12 +26,18 @@
       "title": "Sanity Studio",
       "description": "The Sanity Studio is where you edit and structure your content.",
       "dir": "./studio",
+      "requiredTokens": [
+        {
+          "role": "deploy-studio",
+          "label": "GraphQL API Deployer"
+        }
+      ],
       "provider": {
         "name": "netlify",
         "config": {
-          "base": "/",
-          "dir": "/studio/dist",
-          "cmd": "npm run build-studio && cp studio/netlify.toml studio/dist"
+          "base": "/studio",
+          "dir": "/dist",
+          "cmd": "SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN npm run graphql-deploy && npm run build && cp ./netlify.toml ./dist"
         }
       },
       "previewMedia": {
@@ -46,19 +52,13 @@
       "title": "Events Website",
       "description": "A bare-bones events website that you can use as a starting point for your next event.",
       "dir": "./web",
-      "requiredTokens": [
-        {
-          "role": "deploy-studio",
-          "label": "GraphQL API Deployer"
-        }
-      ],
       "provider": {
         "name": "netlify",
         "requirements": ["build-hook"],
         "config": {
-          "base": "/",
-          "dir": "/web/dist",
-          "cmd": "npm run build-web"
+          "base": "/web",
+          "dir": "/dist",
+          "cmd": "npm run build"
         }
       },
       "previewMedia": {

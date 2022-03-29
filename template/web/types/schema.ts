@@ -103,7 +103,7 @@ export interface EventInformation extends SanityDocument {
   ticket?: string;
 
   /**
-   * Favicon Image — `image`
+   * Favicon image — `image`
    *
    * Make sure the image is square, and preferrably an SVG
    */
