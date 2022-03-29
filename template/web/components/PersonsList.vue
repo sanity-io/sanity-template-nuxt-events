@@ -1,62 +1,35 @@
+<script setup lang="ts">
+import type { DereferencedSession } from '~/types/dereferences'
+interface Props {
+  persons: DereferencedSession['persons'];
+}
+const { persons } = defineProps<Props>()
+</script>
+
 <template>
-  <ul v-if="persons" class="persons">
-    <li v-for="personRef in persons" :key="personRef.person._id" class="person">
-      <nuxt-link :to="{ path: `/speakers/${personRef.person.slug.current}` }">
+  <ul v-if="persons" class="mt-4 p-0 text-sm">
+    <li
+      v-for="personRef in persons"
+      :key="personRef._key"
+      class="mt-2 flex items-center p-0"
+    >
+      <NuxtLink
+        v-if="personRef.person?.slug?.current"
+        :to="{ path: `/speakers/${personRef.person.slug.current}` }"
+        class="contents text-inherit decoration-inherit"
+      >
         <SanityImage
-          :image="personRef.person.image"
-          :alt="personRef.person.image.alt"
-          :width="128"
-          :height="128"
+          v-if="personRef.person.image?.asset?._ref"
+          :asset-id="personRef.person.image.asset._ref"
+          :alt="personRef.person.image.alt || ''"
+          w="56"
+          h="56"
           fit="crop"
-          class="personImage"
+          auto="format"
+          class="mr-2 h-7 rounded-full"
         />
-        {{ personRef.person.name }}
-      </nuxt-link>
+        {{ personRef.person.name || 'Untitled' }}
+      </NuxtLink>
     </li>
   </ul>
 </template>
-<script>
-import SanityImage from '~/components/SanityImage'
-
-export default {
-  components: {
-    SanityImage
-  },
-  props: {
-    persons: {
-      type: Array,
-      default: () => []
-    }
-  }
-}
-</script>
-<style scoped>
-@import '../styles/custom-properties.css';
-
-.session .persons {
-  margin: 1rem 0 0;
-  padding: 0;
-  font-size: var(--font-small-size);
-  line-height: var(--font-small-line-height);
-}
-
-.session .persons .person {
-  display: flex;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  align-items: center;
-}
-
-.session .persons .person a {
-  display: contents;
-  color: inherit;
-  text-decoration: inherit;
-  line-height: 1.75;
-}
-
-.personImage {
-  height: 1.75rem;
-  margin-right: 0.5rem;
-  border-radius: 50%;
-}
-</style>
