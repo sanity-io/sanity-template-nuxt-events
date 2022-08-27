@@ -14,6 +14,8 @@
     "@sanity/default-login",
     "@sanity/dashboard",
     "@sanity/desk-tool",
+    "@sanity/vision",
+    "@sanity/studio-hints",
     "dashboard-widget-structure-menu",
     "dashboard-widget-document-list",
     "dashboard-widget-netlify"
@@ -29,6 +31,10 @@
     {
       "implements": "part:@sanity/dashboard/config",
       "path": "dashboardConfig.js"
+    },
+    {
+      "implements": "part:@sanity/default-layout/studio-hints-config",
+      "path": "./studioHintsConfig.js"
     }
   ]
 }

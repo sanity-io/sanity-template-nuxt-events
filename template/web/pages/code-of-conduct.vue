@@ -1,57 +1,29 @@
-<template>
-  <section class="container">
-    <h1 class="title">Code of conduct</h1>
-    <BlockContent v-if="body" :blocks="body" :serializers="serializers" />
-  </section>
-</template>
+<script setup lang="ts">
+import groq from 'groq'
 
-<script>
-import sanityClient from '~/sanityClient'
-import EventBlock from '~/components/blockContent/EventBlock'
-import PersonBlock from '~/components/blockContent/PersonBlock'
-import BlockContent from 'sanity-blocks-vue-component'
-
-const query = `
-  *[_id == "codeOfConduct"][0] {
-    body[] {
+const { data } = await useSanityQuery(groq`
+  *[_id == "codeOfConduct"][0].body {
       ...,
       children[] {
         ...,
         event->,
-        person->
+        person->,
+        image->
       }
-    }
   }
-`
-export default {
-  components: {
-    BlockContent
-  },
-  data() {
-    return {
-      serializers: {
-        types: {
-          eventReference: EventBlock,
-          personReference: PersonBlock
-        }
-      }
-    }
-  },
-  async asyncData() {
-    return await sanityClient.fetch(query)
-  }
-}
+`)
+
+const pageTitle = useState('pageTitle')
+pageTitle.value = 'Code of conduct'
 </script>
 
-<style scoped>
-.title {
-  margin-bottom: 0.5em;
-}
-
-.container {
-  max-width: 40rem;
-  padding: 0 1rem;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-}
-</style>
+<template>
+  <Container>
+    <main class="mx-auto max-w-2xl">
+      <PageHeading>{{ pageTitle }}</PageHeading>
+      <article class="mt-8 px-2">
+        <PortableText v-if="data" :blocks="data" />
+      </article>
+    </main>
+  </Container>
+</template>

@@ -38,6 +38,12 @@ export default {
       title: 'Ticket link'
     },
     {
+      name: 'favicon',
+      type: 'image',
+      title: 'Favicon image',
+      description: 'Make sure the image is square, and preferrably an SVG'
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',

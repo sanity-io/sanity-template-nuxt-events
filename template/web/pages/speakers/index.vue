@@ -1,90 +1,49 @@
-<template>
-  <section class="container">
-    <h1 class="title">Speakers</h1>
-    <ul class="speakers">
-      <li v-for="speaker in speakers" :key="speaker._id" class="speaker">
-        <nuxt-link :to="{ path: `/speakers/${speaker.slug.current}` }">
-          <SanityImage
-            :width="256"
-            :height="256"
-            :image="speaker.image"
-            class="avatar"
-          />
-          <h2 class="name">{{ speaker.name || 'Secret speaker' }}</h2>
-        </nuxt-link>
-      </li>
-    </ul>
-  </section>
-</template>
-
-<script>
+<script setup lang="ts">
 import groq from 'groq'
-import sanityClient from '~/sanityClient'
-import SanityImage from '~/components/SanityImage'
+import type { Person } from '~/types/schema'
 
-const query = groq`
-  {
-    "speakers": *[_type == "person"]
-  }
-`
+const query = groq`*[_type == "person"]{ _id, name, slug, image }`
+const sanity = useSanity()
+const { data } = await useAsyncData('/speakers', () =>
+  sanity.fetch<Person[]>(query)
+)
 
-export default {
-  components: {
-    SanityImage
-  },
-  async asyncData() {
-    return await sanityClient.fetch(query)
-  }
-}
+const pageTitle = useState('pageTitle')
+pageTitle.value = 'Speakers'
 </script>
 
-<style scoped>
-@import '../../styles/custom-properties.css';
-
-.container {
-  text-align: center;
-  padding: 1.5rem 0;
-  box-sizing: border-box;
-  min-height: calc(100% - 72px - 216px);
-}
-
-.title {
-  margin-bottom: 4rem;
-}
-
-.speakers {
-  display: grid;
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-  max-width: var(--width-medium);
-  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
-}
-
-.speaker {
-  display: block;
-  position: relative;
-  margin-bottom: 4em;
-
-  @nest & > a {
-    display: block;
-    padding: 1.5rem;
-  }
-
-  @nest & .name {
-    font-weight: 600;
-    font-size: var(--font-title3-size);
-    line-height: var(--font-title3-line-height);
-  }
-}
-
-.speaker a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.avatar {
-  border-radius: 50%;
-  max-width: 100%;
-}
-</style>
+<template>
+  <Container>
+    <main>
+      <PageHeading>{{ pageTitle }}</PageHeading>
+      <ul
+        class="mx-auto mt-24 space-y-16 text-center sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:max-w-5xl lg:grid-cols-3"
+      >
+        <li v-for="person in data" :key="person._id">
+          <NuxtLink
+            v-if="person.slug"
+            class="space-y-6"
+            :to="{ path: `/speakers/${person.slug.current}` }"
+          >
+            <SanityImage
+              v-if="person.image?.asset?._ref"
+              class="mx-auto aspect-square h-40 w-40 rounded-full xl:h-56 xl:w-56"
+              :asset-id="person.image.asset._ref"
+              :alt="person.image.alt || ''"
+              fit="crop"
+              h="220"
+              w="220"
+              auto="format"
+            />
+            <div class="space-y-2">
+              <div class="space-y-1 text-lg font-medium leading-6">
+                <h3>{{ person.name || 'Untitled' }}</h3>
+              </div>
+            </div>
+          </NuxtLink>
+          <a v-else>{{ person.name || 'Untitled' }}</a>
+        </li>
+      </ul>
+    </main>
+  </Container>
+</template>

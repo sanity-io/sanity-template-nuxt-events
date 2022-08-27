@@ -1,55 +1,50 @@
-<template>
-  <section class="container">
-    <h1 class="title">Sessions</h1>
-    <div class="sessionGridContainer">
-      <SessionGrid
-        v-if="sessionsWithoutBreak"
-        :sessions="sessionsWithoutBreak"
-      />
-    </div>
-  </section>
-</template>
+<script setup lang="ts">
+import groq from 'groq'
+import type { DereferencedProgram } from '~/types/dereferences'
 
-<script>
-import SessionGrid from '~/components/SessionGrid'
-
-export default {
-  components: { SessionGrid },
-  data() {
-    return {
-      program: this.$store.getters.getProgram
+const query = groq`{
+  "scheduleFrom": *[_type == "eventInformation"][0].schedule.from,
+  "scheduleItems": *[_id == "program"][0].schedule['break' != session->sessionType] {
+    _key,
+    session-> {
+      _id,
+      sessionType,
+      title,
+      summary,
     }
   },
-  computed: {
-    sessionsWithoutBreak: data => {
-      if (data.program && data.program.schedule) {
-        return data.program.schedule.filter(
-          i => i.session.sessionType !== 'break'
-        )
-      }
-    }
-  }
+  "scheduleDurations": *[_id == "program"][0].schedule[] { _key, duration }
+}`
+const sanity = useSanity()
+interface QueryResult {
+  scheduleFrom?: string;
+  scheduleItems?: DereferencedProgram['schedule'];
+  scheduleDurations?: { _key: string; duration: number }[];
 }
+const { data } = await useAsyncData('/sessions', () =>
+  sanity.fetch<QueryResult>(query)
+)
+
+const fromDate = computed(() =>
+  data.value.scheduleFrom ? new Date(data.value.scheduleFrom) : undefined
+)
+const fromTime = useFromTime(data.value.scheduleDurations, fromDate)
+
+const pageTitle = useState('pageTitle')
+pageTitle.value = 'Sessions'
 </script>
 
-<style scoped>
-@import '../../styles/custom-properties.css';
-
-.container {
-  padding: 1.5rem 0;
-  box-sizing: border-box;
-  min-height: calc(100% - 72px - 216px);
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.sessionGridContainer {
-  max-width: var(--width-medium);
-  padding: 0 1.5rem;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-</style>
+<template>
+  <Container>
+    <main>
+      <PageHeading>{{ pageTitle }}</PageHeading>
+      <div class="mx-auto mt-16 max-w-5xl px-2">
+        <SessionGrid
+          v-if="data.scheduleItems"
+          :schedule-items="data.scheduleItems"
+          :from-time="fromTime"
+        />
+      </div>
+    </main>
+  </Container>
+</template>

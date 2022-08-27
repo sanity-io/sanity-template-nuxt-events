@@ -1,145 +1,105 @@
-<template>
-  <section class="container">
-    <header class="header">
-      <h1 class="title">{{ info.name }}</h1>
-      <p class="subtitle">{{ info.description }}</p>
-      <div class="dates">
-        {{ new Date(info.schedule.from) | dateFilter('DD MMMM ha') }}
-        &ndash;
-        {{ new Date(info.schedule.to) | dateFilter('ha') }}
-      </div>
-      <div class="venue">{{ info.venue.name }}, {{ info.venue.city }}</div>
-    </header>
+<script setup lang="ts">
+import groq from 'groq'
+import type { EventInformation } from '~/types/schema'
+import type { DereferencedProgram } from '~/types/dereferences'
 
-    <figure :v-if="info.image">
-      <SanityImage
-        :image="info.image"
-        :width="1800"
-        :height="500"
-        class="mainImage"
-      />
-      <figcaption>{{ info.image.caption }}</figcaption>
-    </figure>
-
-    <div class="sessionListContainer">
-      <h2 class="sessionListTitle">Schedule</h2>
-      <SessionList :program="program" :info="info" />
-    </div>
-  </section>
-</template>
-
-<script>
-import { dateFilter } from 'vue-date-fns'
-
-import sanityClient from '../sanityClient'
-import SanityImage from '~/components/SanityImage'
-import SessionList from '~/components/SessionList'
-
-const query = `
+const query = groq`
   {
-    "info": *[_id == "eventInformation"] {
-      ..., image { ..., asset->}
-    }[0]
+    "info": *[_id == "eventInformation"][0] {
+      name,
+      description,
+      schedule { from, to },
+      venue { name, city },
+      image,
+    },
+    "schedule": *[_id == "program"][0].schedule[] {
+      _key,
+      duration,
+      session-> {
+        _id,
+        sessionType,
+        title,
+        summary,
+        persons[] {
+          _key,
+          person-> {
+            slug,
+            name,
+            image
+          }
+        }
+      }
+    }
   }
 `
-
-export default {
-  components: {
-    SanityImage,
-    SessionList
-  },
-  filters: {
-    dateFilter
-  },
-  data() {
-    return {
-      program: this.$store.getters.getProgram
-    }
-  },
-  async asyncData() {
-    return await sanityClient.fetch(query)
-  },
-  head() {
-    if (!this || !this.info) {
-      return
-    }
-    return {
-      title: this.info.name,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.info.description
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content: this.info.keywords.join(',')
-        }
-      ]
-    }
-  }
+interface QueryResult {
+  info?: EventInformation;
+  schedule?: DereferencedProgram['schedule'];
 }
+
+const sanity = useSanity()
+const { data } = await useAsyncData('/', () =>
+  sanity.fetch<QueryResult>(query)
+)
+
+const fromDate = computed(() =>
+  data.value.info?.schedule?.from
+    ? new Date(data.value.info.schedule.from)
+    : undefined
+)
+const toDate = computed(() =>
+  data.value.info?.schedule?.to
+    ? new Date(data.value.info.schedule.to)
+    : undefined
+)
+const fromTime = useFromTime(data.value.schedule, fromDate)
+
+const pageTitle = useState('pageTitle')
+pageTitle.value = data.value.info?.description
 </script>
 
-<style scoped>
-@import '../styles/custom-media.css';
-@import '../styles/custom-properties.css';
+<template>
+  <main class="py-4">
+    <article class="px-6 text-center">
+      <PageHeading>{{ data.info?.name }}</PageHeading>
+      <p class="text-xl">
+        {{ data.info?.description }}
+      </p>
+      <div class="pt-16 pb-20">
+        <p v-if="fromDate && toDate" class="font-semibold">
+          {{ $format(fromDate, 'dd MMMM ha') }}
+          &ndash;
+          {{ $format(toDate, 'ha') }}
+        </p>
+        <p class="text-sm">
+          {{ data.info?.venue?.name }}, {{ data.info?.venue?.city }}
+        </p>
+      </div>
+    </article>
 
-.container {
-  padding: 1.5rem 0;
-  box-sizing: border-box;
-  min-height: calc(100% - 72px - 216px);
-}
+    <figure v-if="data.info?.image?.asset" class="mb-12">
+      <img
+        :src="$urlFor(data.info.image).size(1800, 500).url()"
+        :alt="data.info.image.alt"
+        height="500"
+        width="1800"
+        loading="lazy"
+        class="w-full align-top"
+      >
+      <figcaption class="px-6 py-1 text-sm">
+        {{ data.info.image.caption }}
+      </figcaption>
+    </figure>
 
-.header {
-  padding: 0 1.5rem;
-  text-align: center;
-}
-
-.title + p + .dates {
-  margin-bottom: 0;
-  font-weight: 600;
-}
-
-.title + p + .dates + .venue {
-  font-size: var(--font-small-size);
-  line-height: var(--font-small-line-height);
-  margin-bottom: 5rem;
-}
-
-figure {
-  margin: 0 0 3em;
-}
-
-figcaption {
-  font-size: var(--font-small-size);
-  line-height: var(--font-small-line-height);
-  padding: 0.25rem 1.5rem;
-}
-
-.mainImage {
-  width: 100%;
-  vertical-align: top;
-}
-
-.sessionListTitle {
-  text-align: center;
-  font-weight: 600;
-  font-size: var(--font-title2-size);
-  line-height: var(--font-title2-line-height);
-  margin: 0 0 3rem;
-
-  @media (--media-min-medium) {
-    font-size: var(--font-title1-size);
-    line-height: var(--font-title1-line-height);
-  }
-}
-
-.sessionListContainer {
-  max-width: var(--width-small);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  box-sizing: border-box;
-}
-</style>
+    <div v-if="data.schedule" class="mx-auto max-w-2xl px-6">
+      <h2 class="mt-2 mb-12 text-center text-2xl font-semibold sm:text-5xl">
+        Schedule
+      </h2>
+      <ScheduleItems
+        v-if="data.schedule"
+        :schedule-items="data.schedule"
+        :from-time="fromTime"
+      />
+    </div>
+  </main>
+</template>
