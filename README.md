@@ -8,7 +8,7 @@ The template contains both a Sanity.io Sanity Studio and a front-end in [Nuxt](h
 
 Want to make a template for Sanity and your favourite front-end framework? We’re still maturing [sanity.io/create](https://sanity.io/create) and our APIs, but do tell us about it on [slack.sanity.io](https://slack.sanity.io).
 
-![The Sanity and Nuxt.js powered events website](https://github.com/sanity-io/sanity-template-nuxt-events/blob/master/assets/frontend.jpg?raw=true)
+![The Sanity and Nuxt.js powered events website](https://github.com/sanity-io/sanity-template-nuxt-events/blob/main/assets/frontend.jpg?raw=true)
 
 ## Local development
 
